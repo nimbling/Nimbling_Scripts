@@ -11,3 +11,8 @@ I have them set up like this:
 [CMD + SHIFT + O] Outline both text and stroke, using the shortcut previously reserved only for text.
 
 [CMD + SHIFT + H] & [CMD + SHIFT + V] Flip Horizontal and Vertical.
+
+The Axonometry folder contains five illustrator actions sets that emulate different axonometries, of which the “SSR 30º” & “ISO 45º + Vertical scale” are likely what you want.
+
+The “Flatland -20º & 30º” set is the one I used to create the cabinet
+at http://nimbling.com/graphic.html
