@@ -9,8 +9,11 @@ I have them set up like this:
 * [CMD + 7] "Clipper.jsx" AND [CMD + ALT + CTRL + 7] "Bottomclipper.jsx".
 Ideal for cell shading objects. Super smooth workflow when used with Astute Graphics' Dynamic Sketch.
 
-* [CMD + SHIFT + O]
+* [CMD + SHIFT + O] "Outline Stroke and Text.jsx"
 Outline both text and stroke, using the shortcut previously reserved only for text.
+
+* [CMD + ALT + CTRL + S] "Swap Object Colors.jsx"
+This script swaps the colors of exactly TWO selected objects.
 
 * [CMD + SHIFT + H] & [CMD + SHIFT + V]
 Flip Horizontal and Vertical.
