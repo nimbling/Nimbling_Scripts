@@ -8,7 +8,7 @@
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-function Main(curDoc, sel, amountofselectedobjects, clipobject, clipcolors){
+function Main(curDoc, sel, amountofselectedobjects){
     if (amountofselectedobjects){
         if(curDoc.activeLayer.locked || !curDoc.activeLayer.visible){
             alert("Please select objects on an unlocked and visible layer,\nthen run this script again.");
