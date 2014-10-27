@@ -12,20 +12,21 @@ I have them set up like this:
 These clip scripts attempt to copy the initial objects appearance and paste it to the resulting clipping mask. Due to illustrator limitations this only works for single stroke, single fill appearances.
 Ideal for cell shading objects. Allowing for a super smooth workflow when used with Astute Graphics' Dynamic Sketch; Simply draw an object, draw the shadow / highlight bits, select both and execute the "Bottomclipper".
 
+###Send behind… & Send in Front of…###
+* (CMD + CTRL + SHIFT + [ ) & (CMD + CTRL + SHIFT + ] )
+Sort the selected objects in front of the topmost- or behind the bottom object. Useful when you use large amounts of objects and you just keep pressing "backward" or "forward" without revealing or eclipsing your other, chosen object.
+*Fun fact: these even work when either object is inside- or outside of a clipping group.*
+
 ###Outliner###
 * (CMD + SHIFT + O) "Outline Stroke and Text.jsx"
 Outline both text and stroke, using the shortcut previously reserved only for text.
 
 ###Swap object colors###
 * (CMD + ALT + CTRL + S) "Swap Object Colors.jsx"
-This script swaps the colors of exactly TWO selected objects.
+This script swaps the colors (stroke and-or fill) of exactly TWO selected objects.
 
 ###Flip Horizontal & Vertical###
 * (CMD + SHIFT + H) & (CMD + SHIFT + V)
-Flip Horizontal and Vertical.
-
-###Send behind… & Send in Front of…###
-* (CMD + CTRL + SHIFT + [) & (CMD + CTRL + SHIFT + ])
 Flip Horizontal and Vertical.
 
 ###Axonometry scripts###
