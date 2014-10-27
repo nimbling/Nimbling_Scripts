@@ -13,9 +13,8 @@ function Main(curDoc, sel, amountofselectedobjects, clipobject, clipcolors){
         if(curDoc.activeLayer.locked || !curDoc.activeLayer.visible){
             alert("Please select objects on an unlocked and visible layer,\nthen run this script again.");
         }else{
-            for (i = amountofselectedobjects-1 ; i >= 0; i--) {
-                bottomsel = amountofselectedobjects-1;
-                sel[i].move(sel[bottomsel], ElementPlacement.PLACEAFTER);
+            for (i = 1 ; i <= amountofselectedobjects-1 ; i++) {
+                sel[i].move(sel[0], ElementPlacement.PLACEBEFORE);
             }            
             return; //AND EXIT
             }
