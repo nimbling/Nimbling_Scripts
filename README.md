@@ -14,8 +14,8 @@ Ideal for cell shading objects. Allowing for a super smooth workflow when used w
 
 ###Send behind… & Send in Front of…###
 * (CMD + CTRL + SHIFT + [ ) & (CMD + CTRL + SHIFT + ] )
-Sort the selected objects in front of the topmost- or behind the bottom object. Useful when you use large amounts of objects and you just keep pressing "backward" or "forward" without revealing or eclipsing your other, chosen object.
-*Fun fact: these even work when either object is inside- or outside of a clipping group.*
+Put the selected objects in front of the topmost- or behind the bottom object of the selection. Useful when you use large amounts of objects and you just keep pressing "backward" or "forward" without revealing or eclipsing your other, chosen object.
+*Fun fact: these even work when either object is inside- or outside of a clipping group, allowing you to add or remove an object from a clipping group super quick*
 
 ###Outliner###
 * (CMD + SHIFT + O) "Outline Stroke and Text.jsx"
