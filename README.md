@@ -17,7 +17,7 @@ Ideal for cell shading objects. Allowing for a super smooth workflow when used w
 
 ###Send behind… & Bring in Front of…###
 * (CMD + CTRL + SHIFT + [ ) & (CMD + CTRL + SHIFT + ] )
-* 
+
 ![Bring in Front of Icon](http://www.nimbling.com/images/Bring-in-Front-of.png) ![Send Behind Icon](http://www.nimbling.com/images/Send-Behind.png)
 
 Put the selected objects in front of the topmost- or behind the bottom object of the selection. Useful when you use large amounts of objects and you just keep pressing "backward" or "forward" without revealing or eclipsing your other, chosen object.
