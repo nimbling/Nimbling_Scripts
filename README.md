@@ -34,6 +34,7 @@ This script swaps the colors (stroke and-or fill) of exactly TWO selected object
 Flip Horizontal and Vertical.
 
 ###Axonometry scripts###
+![iso45v Icon](http://www.nimbling.com/images/iso45v.png) ![iso45 Icon](http://www.nimbling.com/images/iso45.png) ![ssr30 Icon](http://www.nimbling.com/images/ssr30.png) ![fl2030 Icon](http://www.nimbling.com/images/fl2030.png) ![fl3020 Icon](http://www.nimbling.com/images/fl3020.png)
 * The Axonometry folder contains five illustrator actions sets that emulate different axonometries,
 of which the “SSR 30º” & “ISO 45º + Vertical scale” are likely what you want.
 The “Flatland -20º & 30º” set is the one I used to create the cabinet
