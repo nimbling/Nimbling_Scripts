@@ -27,18 +27,21 @@ Put the selected objects in front of the topmost- or behind the bottom object of
 
 ##Outliner##
 ![Outliner Icon](images/Outliner.png)
+
 1. Select one or more objects.
 2. (CMD + SHIFT + O) "Outline Stroke and Text.jsx"
 
 Outline both text and stroke, using the shortcut previously reserved only for text.
 
 ##Swap object colors##
+
 1. Select exactly two objects.
 2. (CMD + ALT + CTRL + S) "Swap Object Colors.jsx"
 
 This script swaps the colors (stroke and-or fill) of exactly TWO selected objects.
 
 ##Flip Horizontal & Vertical##
+
 1. Select a single object.
 2. (CMD + SHIFT + H) & (CMD + SHIFT + V)
 
@@ -46,6 +49,7 @@ Flip Horizontal and Vertical.
 
 ##Axonometry scripts##
 ![iso45v Icon](images/iso45v.png) ![iso45 Icon](images/iso45.png) ![ssr30 Icon](images/ssr30.png) ![fl2030 Icon](images/fl2030.png) ![fl3020 Icon](images/fl3020.png)
+
 1. Select a single object, run action.
 2. The Axonometry folder contains five illustrator actions sets that emulate different axonometries,
 of which the “SSR 30º” & “ISO 45º + Vertical scale” are likely what you want.
