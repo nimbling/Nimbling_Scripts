@@ -8,17 +8,15 @@ I have these scripts bound to shortcuts using redsweaters' Fastscripts - replaci
 I have them set up like this:
 
 ###Clip scripts###
-* (CMD + 7) "Clipper.jsx". AND (CMD + ALT + CTRL + 7) "Bottomclipper.jsx".
- 
 ![Clipper Icon](http://www.nimbling.com/images/Clipper.png) ![Bottom Clipper Icon](http://www.nimbling.com/images/Bottomclipper.png)
+* (CMD + 7) "Clipper.jsx". AND (CMD + ALT + CTRL + 7) "Bottomclipper.jsx".
 
 These clip scripts attempt to copy the initial objects appearance and paste it to the resulting clipping mask. Due to illustrator limitations this only works for single stroke, single fill appearances.
 Ideal for cell shading objects. Allowing for a super smooth workflow when used with Astute Graphics' Dynamic Sketch; Simply draw an object, draw the shadow / highlight bits, select both and execute the "Bottomclipper".
 
 ###Send behind… & Bring in Front of…###
-* (CMD + CTRL + SHIFT + [ ) & (CMD + CTRL + SHIFT + ] )
-
 ![Bring in Front of Icon](http://www.nimbling.com/images/Bring-in-Front-of.png) ![Send Behind Icon](http://www.nimbling.com/images/Send-Behind.png)
+* (CMD + CTRL + SHIFT + [ ) & (CMD + CTRL + SHIFT + ] )
 
 Put the selected objects in front of the topmost- or behind the bottom object of the selection. Useful when you use large amounts of objects and you just keep pressing "backward" or "forward" without revealing or eclipsing your other, chosen object.
 *Fun fact: these even work when either object is inside- or outside of a clipping group, allowing you to add or remove an object from a clipping group super quick*
