@@ -22,6 +22,7 @@ Put the selected objects in front of the topmost- or behind the bottom object of
 *Fun fact: these even work when either object is inside- or outside of a clipping group, allowing you to add or remove an object from a clipping group super quick*
 
 ###Outliner###
+![Outliner Icon](images/Outliner.png)
 * (CMD + SHIFT + O) "Outline Stroke and Text.jsx"
 Outline both text and stroke, using the shortcut previously reserved only for text.
 
