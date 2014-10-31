@@ -16,6 +16,8 @@ I have them set up like this:
 These clip scripts attempt to copy the initial objects appearance and paste it to the resulting clipping mask. Due to illustrator limitations this only works for single stroke, single fill appearances.
 Ideal for cell shading objects. Allowing for a super smooth workflow when used with Astute Graphics' Dynamic Sketch; Simply draw an object, draw the shadow / highlight bits, select both and execute the "Bottomclipper".
 
+![Bottomclipper in Action](images/VectorLips.gif)
+
 ##Send behind… & Bring in Front of…##
 ![Bring in Front of Icon](images/Bring-in-Front-of.png) ![Send Behind Icon](images/Send-Behind.png)
 
