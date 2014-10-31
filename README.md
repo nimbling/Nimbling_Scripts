@@ -57,3 +57,5 @@ Flip Horizontal and Vertical.
 of which the “SSR 30º” & “ISO 45º + Vertical scale” are likely what you want.
 The “Flatland -20º & 30º” set is the one I used to create the cabinet
 at http://nimbling.com/graphic.html
+
+![Isometry in action](images/Bookshelf.gif)
