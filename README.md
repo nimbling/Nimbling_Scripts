@@ -49,7 +49,7 @@ This script swaps the colors (stroke and-or fill) of exactly TWO selected object
 
 Flip Horizontal and Vertical.
 
-##Axonometry scripts##
+##Axonometry actions##
 ![iso45v Icon](images/iso45v.png) ![iso45 Icon](images/iso45.png) ![ssr30 Icon](images/ssr30.png) ![fl2030 Icon](images/fl2030.png) ![fl3020 Icon](images/fl3020.png)
 
 1. Select a single object, run action.
@@ -59,7 +59,5 @@ The “Flatland -20º & 30º” set is the one I used to create the cabinet
 at http://nimbling.com/graphic.html
 
 ![Isometry in action](images/Bookshelf.gif)
-
-![A Cabinet made with the "flatland" actions](http://nimbling.com/images/pr/gd-06-large.jpg)
 
 ![Example of isoemtric artwork](http://nimbling.com/images/pr/gd-07-large.jpg)
