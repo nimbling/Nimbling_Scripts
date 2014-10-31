@@ -59,3 +59,5 @@ The “Flatland -20º & 30º” set is the one I used to create the cabinet
 at http://nimbling.com/graphic.html
 
 ![Isometry in action](images/Bookshelf.gif)
+
+![Example of isoemtric artwork](http://nimbling.com/images/pr/gd-07-large.jpg)
