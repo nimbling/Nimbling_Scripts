@@ -130,7 +130,7 @@ Axonometry actions
 
 ![](<http://nimbling.com/images/pr/gd-07-large.jpg>)
 
-~   Example of isoemtric artwork
+~   Example of isometric artwork
 
  
 
