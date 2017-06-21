@@ -1,0 +1,1 @@
+﻿#target illustratorvar doc = app.activeDocument;var ab = doc.artboards.getActiveArtboardIndex();var artPoints = doc.artboards[ab].artboardRect;alert (artPoints);var left = Math.round(artPoints[0]);var top = Math.round(artPoints[1]);var right = Math.round(artPoints[2]);var bottom = Math.round(artPoints[3]);doc.artboards[ab].artboardRect = [left,top,right,bottom];

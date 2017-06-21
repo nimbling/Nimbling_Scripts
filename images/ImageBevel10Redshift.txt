@@ -1,0 +1,37 @@
+<filter  height="200%" id="imageHalfBevelRedshiftDown" width="200%" x="-50%" y="-50%">
+
+		<feColorMatrix  in="SourceGraphic" result="ExtrudeSlice" type="matrix" values=".7   0   0   0   0                 0  .5   0   0   0                 0   0  .5   0   0                 0   0   0   1   0 ">
+		</feColorMatrix>
+	<feOffset  class="ioffset" dx="0" dy="0" in="ExtrudeSlice" result="ExtrudeSlice0"></feOffset>
+	<feOffset  class="ioffset" dx="0" dy="1" in="ExtrudeSlice" result="ExtrudeSlice1"></feOffset>
+	<feOffset  class="ioffset" dx="0" dy="2" in="ExtrudeSlice" result="ExtrudeSlice2"></feOffset>
+	<feOffset  class="ioffset" dx="0" dy="3" in="ExtrudeSlice" result="ExtrudeSlice3"></feOffset>
+	<feOffset  class="ioffset" dx="0" dy="4" in="ExtrudeSlice" result="ExtrudeSlice4"></feOffset>
+	<feOffset  class="ioffset" dx="0" dy="5" in="ExtrudeSlice" result="ExtrudeSlice5"></feOffset>
+	<feOffset  class="ioffset" dx="0" dy="6" in="ExtrudeSlice" result="ExtrudeSlice6"></feOffset>
+	<feOffset  class="ioffset" dx="0" dy="7" in="ExtrudeSlice" result="ExtrudeSlice7"></feOffset>
+	<feOffset  class="ioffset" dx="0" dy="8" in="ExtrudeSlice" result="ExtrudeSlice8"></feOffset>
+	<feOffset  class="ioffset" dx="0" dy="9" in="ExtrudeSlice" result="ExtrudeSlice9"></feOffset>
+	<feOffset  class="ioffset" dx="0" dy="10" in="ExtrudeSlice" result="ExtrudeSlice10"></feOffset>
+	<feMerge  result="Extrusion">
+		<feMergeNode  in="ExtrudeSlice10"></feMergeNode>
+		<feMergeNode  in="ExtrudeSlice9"></feMergeNode>
+		<feMergeNode  in="ExtrudeSlice8"></feMergeNode>
+		<feMergeNode  in="ExtrudeSlice7"></feMergeNode>
+		<feMergeNode  in="ExtrudeSlice6"></feMergeNode>
+		<feMergeNode  in="ExtrudeSlice5"></feMergeNode>
+		<feMergeNode  in="ExtrudeSlice4"></feMergeNode>
+		<feMergeNode  in="ExtrudeSlice3"></feMergeNode>
+		<feMergeNode  in="ExtrudeSlice2"></feMergeNode>
+		<feMergeNode  in="ExtrudeSlice1"></feMergeNode>
+		<feMergeNode  in="ExtrudeSlice0"></feMergeNode>
+	</feMerge>
+	<feOffset  dx="0" dy="0" in="SourceGraphic" result="SourceGraphicOffset"></feOffset>
+	<feMerge  result="THEFINALMERGE">
+		<feMergeNode  in="Extrusion"></feMergeNode>
+		<!--      this is UNDER the SourceGraphic      -->
+		<feMergeNode  in="SourceGraphicOffset"></feMergeNode>
+		<feMergeNode  in="CarvedMasked"></feMergeNode>
+		<!--      this is OVER the SourceGraphic      -->
+	</feMerge>
+</filter>
