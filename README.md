@@ -90,6 +90,18 @@ Flip Horizontal & Vertical
 
 Flip Horizontal and Vertical.
 
+SVG image bevel filters, for use inside of illustrator.
+-----------------------------
+
+1.  Select an object or group of objects.
+2.  Got to "Effect > SVG Filters > Apply SVG filter...
+3.  In the dialog you're presented with, press the "new SVG filter" icon (looks like new document)
+4.  Paste "ImageBevel10Redshift.txt" or "ImageBevel20Redshift.txt" over everything there.
+
+![](<images/fruitbevels.png>)
+
+~   Slices of fruit made using these SVG filters
+
 Axonometry actions
 ------------------
 
