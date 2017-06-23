@@ -57,6 +57,13 @@ chosen object. *Fun fact: these even work when either object is inside- or
 outside of a clipping group, allowing you to add or remove an object from a
 clipping group super quick*
 
+Clear fill, clear stroke scripts.
+--------
+
+Using these, you can directly clear a fill or a stroke using single shortcuts.
+I have them set up to option+/ and cmd+/ - which maps just like photoshop!
+If it's not working, use direct- or group selection tools to select your object.
+
 Outliner
 --------
 
