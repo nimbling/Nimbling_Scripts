@@ -2,6 +2,7 @@ Nimbling\_Scripts
 =================
 
 Scripts to enhance graphic workflows in Illustrator and/or Mac OS X
+Some I wrote myself, some are others' work, attribution is in the scripts themselves.
 
 I have these scripts bound to shortcuts using redsweaters' Fastscripts -
 replacing several illustrator native shortcuts (taking care to remove them from
