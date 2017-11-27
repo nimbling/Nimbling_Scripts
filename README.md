@@ -11,6 +11,15 @@ illustrator) and adding a few.
 
 I have them set up like this:
 
+Illustrator Panels
+------------
+Three panels for use in Illustrator, packaging some of the scripts found below.
+Use https://aescripts.com/learn/zxp-installer/ to install them.
+ZXP's:
+• Nimbling CLippers
+• ISO45
+• SSR30
+
 Clip scripts
 ------------
 
