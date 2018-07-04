@@ -66,38 +66,39 @@ If it's not working, use direct- or group selection tools to select your object.
 Stroke width and round Cap scripts
 --------
 Increase, decrease stroke width
-![](<images/Stroke%20Down.png>)
-![](<images/Stroke%20Up.png>)
+![](<Stroke%20Down.png>)
+![](<Stroke%20Up.png>)
 
 Round this stroke cap (with bonus corner rounding)
-![](<images/RoundCap.png>)
+![](<RoundCap.png>)
 
 
 Rename Artboard
 --------
-![](<images/Rename%20Artboard.png>)
+![](<Rename%20Artboard.png>)
 this pops up a little dialog with the layer name preselected.
 I have it bound to CMD OPTION R
 I use this *SO MUCH*
 
 Rename / Lock Layer
 --------
-![](<images/Rename%20Layer.png>)
-![](<images/Layer%20Lock.png>)
+Nimbling_Scripts/Rename Layer.png
+![](<Rename%20Layer.png>)
+![](<Layer%20Lock.png>)
 
 Center to artboard
 --------
 Centers your selection to the artboard you're on. I use this all day as a fast starting point to further align from.
 It's only weakness is that it fails on clipping paths, as it takes the bounds of all paths in it.
 I have it bound to CTRL OPTION CMD C
-![](<images/Center%20to%20Artboard.png>)
+![](<Center%20to%20Artboard.png>)
 
 Reverse path
 --------
 Is your compound path misbehaving? Did you apply a nice stroke that's the wrong way? Do you have a multi-layered appearance stack that just doesn't look right?
 Reverse path to the rescue :)
 I have it bound to CTRL SHIFT CMD R
-![](<images/Reverse%20Path.png>)
+![](<Reverse%20Path.png>)
 
 
 Outliner
@@ -179,4 +180,4 @@ Window Tiler Script (or .App)
 
 Run an Illustrator script using Alfred, on a single shortcut, with auto complete
 --------------------------------------------------------------------------------
-Install "Illustrator Scripts.alfredworkflow" by double clicking it, modify the folder it looks for your scripts for in this window: ![](<images/Modify your folder.png>). I have assigned CTRL OPTION CMD SPACE to it (just mash the bottom row leading up to space) and start typing what your scripts need to do.
+Install "Illustrator Scripts.alfredworkflow" by double clicking it, modify the folder it looks for your scripts for in this window: ![](<Modify%20your%20folder.png>). I have assigned CTRL OPTION CMD SPACE to it (just mash the bottom row leading up to space) and start typing what your scripts need to do.
