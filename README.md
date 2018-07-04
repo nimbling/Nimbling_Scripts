@@ -22,17 +22,12 @@ ZXP's:
 
 Clip scripts
 ------------
-
 ![](<images/Clipper.png>)
-
-~   Clipper Icon
 
 ![](<images/Bottomclipper.png>)
 
-~   Bottom Clipper Icon
-
+HOW TO USE:
 1.  Select two or more objects.
-
 2.  (CMD + 7) "Clipper.jsx". AND (CMD + ALT + CTRL + 7) "Bottomclipper.jsx".
 
 These clip scripts attempt to copy the initial objects appearance and paste it
@@ -44,18 +39,12 @@ execute the "Bottomclipper".
 
 ![](<images/VectorLips.gif>)
 
-~   Bottomclipper in Action
 
 Send behind… & Bring in Front of…
 ---------------------------------
-
 ![](<images/Bring-in-Front-of.png>)
 
-~   Bring in Front of Icon
-
 ![](<images/Send-Behind.png>)
-
-~   Send Behind Icon
 
 1.  Select two or more objects.
 
@@ -70,17 +59,51 @@ clipping group super quick*
 
 Clear fill, clear stroke scripts.
 --------
-
 Using these, you can directly clear a fill or a stroke using single shortcuts.
 I have them set up to option+/ and cmd+/ - which maps just like photoshop!
 If it's not working, use direct- or group selection tools to select your object.
+
+Stroke width and round Cap scripts
+--------
+Increase, decrease stroke width
+![](<images/Stroke Down.png>)
+![](<images/Stroke Up.png>)
+
+Round this stroke cap (with bonus corner rounding)
+![](<images/RoundCap.png>)
+
+
+Rename Artboard
+--------
+![](<images/Rename Artboard.png>)
+this pops up a little dialog with the layer name preselected.
+I have it bound to CMD OPTION R
+I use this *SO MUCH*
+
+Rename / Lock Layer
+--------
+![](<images/Rename Layer.png>)
+![](<images/Layer Lock.png>)
+
+Center to artboard
+--------
+Centers your selection to the artboard you're on. I use this all day as a fast starting point to further align from.
+It's only weakness is that it fails on clipping paths, as it takes the bounds of all paths in it.
+I have it bound to CTRL OPTION CMD C
+![](<images/Center to Artboard.png>)
+
+Reverse path
+--------
+Is your compound path misbehaving? Did you apply a nice stroke that's the wrong way? Do you have a multi-layered appearance stack that just doesn't look right?
+Reverse path to the rescue :)
+I have it bound to CTRL SHIFT CMD R
+![](<images/Reverse Path.png>)
+
 
 Outliner
 --------
 
 ![](<images/Outliner.png>)
-
-~   Outliner Icon
 
 1.  Select one or more objects.
 
@@ -125,23 +148,13 @@ Axonometry actions
 
 ![](<images/iso45v.png>)
 
-~   iso45v Icon
-
 ![](<images/iso45.png>)
-
-~   iso45 Icon
 
 ![](<images/ssr30.png>)
 
-~   ssr30 Icon
-
 ![](<images/fl2030.png>)
 
-~   fl2030 Icon
-
 ![](<images/fl3020.png>)
-
-~   fl3020 Icon
 
 1.  Select a single object, run action.
 
@@ -152,20 +165,18 @@ Axonometry actions
 
 ![](<images/Bookshelf.gif>)
 
-~   Isometry in action
-
 ![](<http://nimbling.com/images/pr/gd-06-large.jpg>)
-
-~   Build Your Own Cabinet - Style
 
 ![](<http://nimbling.com/images/pr/gd-07-large.jpg>)
 
-~   Example of isometric artwork
-
- 
 
 Window Tiler Script (or .App)
 -----------------------------
 
 1.  Launch using your launcher of choice (Better touch tool, Alfred,
     Quicksilver, Launchbar, etc.) to tile up to 12 of your finder windows.
+    
+
+Run an Illustrator script using Alfred, on a single shortcut, with auto complete
+--------------------------------------------------------------------------------
+Install "Illustrator Scripts.alfredworkflow" by double clicking it, modify the folder it looks for your scripts for in this window: ![](<images/Modify your folder.png>). I have assigned CTRL OPTION CMD SPACE to it (just mash the bottom row leading up to space) and start typing what your scripts need to do.
