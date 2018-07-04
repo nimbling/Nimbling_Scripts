@@ -66,23 +66,28 @@ If it's not working, use direct- or group selection tools to select your object.
 Stroke width and round Cap scripts
 --------
 Increase, decrease stroke width
+
 ![](<Stroke%20Down.png>)
 ![](<Stroke%20Up.png>)
 
 Round this stroke cap (with bonus corner rounding)
+
 ![](<RoundCap.png>)
 
 
 Rename Artboard
 --------
-![](<Rename%20Artboard.png>)
 this pops up a little dialog with the layer name preselected.
+
+![](<Rename%20Artboard.png>)
+
 I have it bound to CMD OPTION R
 I use this *SO MUCH*
 
 Rename / Lock Layer
 --------
 Nimbling_Scripts/Rename Layer.png
+
 ![](<Rename%20Layer.png>)
 ![](<Layer%20Lock.png>)
 
@@ -91,6 +96,7 @@ Center to artboard
 Centers your selection to the artboard you're on. I use this all day as a fast starting point to further align from.
 It's only weakness is that it fails on clipping paths, as it takes the bounds of all paths in it.
 I have it bound to CTRL OPTION CMD C
+
 ![](<Center%20to%20Artboard.png>)
 
 Reverse path
@@ -98,6 +104,7 @@ Reverse path
 Is your compound path misbehaving? Did you apply a nice stroke that's the wrong way? Do you have a multi-layered appearance stack that just doesn't look right?
 Reverse path to the rescue :)
 I have it bound to CTRL SHIFT CMD R
+
 ![](<Reverse%20Path.png>)
 
 
