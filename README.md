@@ -28,7 +28,7 @@ Clip scripts
 
 HOW TO USE:
 1.  Select two or more objects.
-2.  (CMD + 7) "Clipper.jsx". AND (CMD + ALT + CTRL + 7) "Bottomclipper.jsx".
+2.  **CMD + 7** "Clipper.jsx". AND **CMD + ALT + CTRL + 7** "Bottomclipper.jsx".
 
 These clip scripts attempt to copy the initial objects appearance and paste it
 to the resulting clipping mask. Due to illustrator limitations this only works
@@ -70,10 +70,13 @@ Increase, decrease stroke width
 ![](<Stroke%20Down.png>)
 ![](<Stroke%20Up.png>)
 
+**ALT \[ & ALT ]**
+
 Round this stroke cap (with bonus corner rounding)
 
 ![](<RoundCap.png>)
 
+**CTRL SHIFT R**
 
 Rename Artboard
 --------
@@ -81,8 +84,8 @@ this pops up a little dialog with the layer name preselected.
 
 ![](<Rename%20Artboard.png>)
 
-I have it bound to CMD OPTION R
-I use this *SO MUCH*
+I have it bound to **CMD OPTION R**
+I export PNG's so I use this **ALL DAY LONG**
 
 Rename / Lock Layer
 --------
@@ -115,7 +118,7 @@ Outliner
 
 1.  Select one or more objects.
 
-2.  (CMD + SHIFT + O) "Outline Stroke and Text.jsx"
+2.  **CMD + SHIFT + O** "Outline Stroke and Text.jsx"
 
 Outline both text and stroke, using the shortcut previously reserved only for
 text.
@@ -125,7 +128,7 @@ Swap object colors
 
 1.  Select exactly two objects.
 
-2.  (CMD + ALT + CTRL + S) "Swap Object Colors.jsx"
+2.  **CMD + ALT + CTRL + S** "Swap Object Colors.jsx"
 
 This script swaps the colors (stroke and-or fill) of exactly TWO selected
 objects.
@@ -135,7 +138,7 @@ Flip Horizontal & Vertical
 
 1.  Select a single object.
 
-2.  (CMD + SHIFT + H) & (CMD + SHIFT + V)
+2.  **CMD + SHIFT + H** & **CMD + SHIFT + V**
 
 Flip Horizontal and Vertical.
 
@@ -187,4 +190,4 @@ Window Tiler Script (or .App)
 
 Run an Illustrator script using Alfred, on a single shortcut, with auto complete
 --------------------------------------------------------------------------------
-Install "Illustrator Scripts.alfredworkflow" by double clicking it, modify the folder it looks for your scripts for in this window: ![](<Modify%20your%20folder.png>). I have assigned CTRL OPTION CMD SPACE to it (just mash the bottom row leading up to space) and start typing what your scripts need to do.
+Install "Illustrator Scripts.alfredworkflow" by double clicking it, modify the folder it looks for your scripts for in this window: ![](<Modify%20your%20folder.png>). I have assigned **CTRL OPTION CMD SPACE** to it (just mash the bottom row including space) and start typing what your scripts need to do.
