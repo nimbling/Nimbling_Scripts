@@ -67,10 +67,13 @@ Stroke width and round Cap scripts
 --------
 Increase, decrease stroke width
 
-![](<Stroke%20Down.png>)
 ![](<Stroke%20Up.png>)
 
 **ALT \]**
+
+
+![](<Stroke%20Down.png>)
+
 **ALT \[**
 
 Round this stroke cap (with bonus corner rounding)
