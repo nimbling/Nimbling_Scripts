@@ -48,7 +48,7 @@ Send behind… & Bring in Front of…
 
 1.  Select two or more objects.
 
-2.  (CMD + CTRL + SHIFT + [ ) & (CMD + CTRL + SHIFT + ] )
+2.  **CMD + CTRL + SHIFT + \[**
 
 Put the selected objects in front of the topmost- or behind the bottom object of
 the selection. Useful when you use large amounts of objects and you just keep
@@ -86,7 +86,7 @@ I use this *SO MUCH*
 
 Rename / Lock Layer
 --------
-Nimbling_Scripts/Rename Layer.png
+Is moving your mouse all the way to your layer palette wearing you down? Did you wish you could lock the current layer using a shortcut? These scripts got your back.
 
 ![](<Rename%20Layer.png>)
 ![](<Layer%20Lock.png>)
@@ -95,7 +95,7 @@ Center to artboard
 --------
 Centers your selection to the artboard you're on. I use this all day as a fast starting point to further align from.
 It's only weakness is that it fails on clipping paths, as it takes the bounds of all paths in it.
-I have it bound to CTRL OPTION CMD C
+I have it bound to **CTRL OPTION CMD C**
 
 ![](<Center%20to%20Artboard.png>)
 
@@ -103,7 +103,7 @@ Reverse path
 --------
 Is your compound path misbehaving? Did you apply a nice stroke width that's the wrong way? Do you have a multi-layered appearance stack that just doesn't look right?
 Reverse path to the rescue :)
-I have it bound to CTRL SHIFT CMD R
+I have it bound to **CTRL SHIFT CMD R**
 
 ![](<Reverse%20Path.png>)
 
