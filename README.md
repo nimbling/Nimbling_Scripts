@@ -101,7 +101,7 @@ I have it bound to CTRL OPTION CMD C
 
 Reverse path
 --------
-Is your compound path misbehaving? Did you apply a nice stroke that's the wrong way? Do you have a multi-layered appearance stack that just doesn't look right?
+Is your compound path misbehaving? Did you apply a nice stroke width that's the wrong way? Do you have a multi-layered appearance stack that just doesn't look right?
 Reverse path to the rescue :)
 I have it bound to CTRL SHIFT CMD R
 
