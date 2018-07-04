@@ -70,7 +70,8 @@ Increase, decrease stroke width
 ![](<Stroke%20Down.png>)
 ![](<Stroke%20Up.png>)
 
-**ALT \[ & ALT ]**
+**ALT \]**
+**ALT \[**
 
 Round this stroke cap (with bonus corner rounding)
 
