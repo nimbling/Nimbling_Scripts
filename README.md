@@ -67,18 +67,18 @@ Stroke width and round Cap scripts
 --------
 Increase, decrease stroke width
 
-![](<Stroke%20Up.png>)
+![](<images/Stroke%20Up.png>)
 
 **ALT \]**
 
 
-![](<Stroke%20Down.png>)
+![](<images/Stroke%20Down.png>)
 
 **ALT \[**
 
 Round this stroke cap (with bonus corner rounding)
 
-![](<RoundCap.png>)
+![](<images/RoundCap.png>)
 
 **CTRL SHIFT R**
 
@@ -86,7 +86,7 @@ Rename Artboard
 --------
 this pops up a little dialog with the layer name preselected.
 
-![](<Rename%20Artboard.png>)
+![](<images/Rename%20Artboard.png>)
 
 I have it bound to **CMD OPTION R**
 I export PNG's so I use this **ALL DAY LONG**
@@ -95,8 +95,8 @@ Rename / Lock Layer
 --------
 Is moving your mouse all the way to your layer palette wearing you down? Did you wish you could lock the current layer using a shortcut? These scripts got your back.
 
-![](<Rename%20Layer.png>)
-![](<Layer%20Lock.png>)
+![](<images/Rename%20Layer.png>)
+![](<images/Layer%20Lock.png>)
 
 Center to artboard
 --------
@@ -104,7 +104,7 @@ Centers your selection to the artboard you're on. I use this all day as a fast s
 It's only weakness is that it fails on clipping paths, as it takes the bounds of all paths in it.
 I have it bound to **CTRL OPTION CMD C**
 
-![](<Center%20to%20Artboard.png>)
+![](<images/Center%20to%20Artboard.png>)
 
 Reverse path
 --------
@@ -112,7 +112,7 @@ Is your compound path misbehaving? Did you apply a nice stroke width that's the 
 Reverse path to the rescue :)
 I have it bound to **CTRL SHIFT CMD R**
 
-![](<Reverse%20Path.png>)
+![](<images/Reverse%20Path.png>)
 
 
 Outliner
@@ -194,4 +194,4 @@ Window Tiler Script (or .App)
 
 Run an Illustrator script using Alfred, on a single shortcut, with auto complete
 --------------------------------------------------------------------------------
-Install "Illustrator Scripts.alfredworkflow" by double clicking it, modify the folder it looks for your scripts for in this window: ![](<Modify%20your%20folder.png>). I have assigned **CTRL OPTION CMD SPACE** to it (just mash the bottom row including space) and start typing what your scripts need to do.
+Install "Illustrator Scripts.alfredworkflow" by double clicking it, modify the folder it looks for your scripts for in this window: ![](<images/Modify%20your%20folder.png>). I have assigned **CTRL OPTION CMD SPACE** to it (just mash the bottom row including space) and start typing what your scripts need to do.
