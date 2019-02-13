@@ -12,18 +12,18 @@ if ( app.documents.length > 0 ) {
         var newstrokewidth;
         currentstrokewidth = pgitem.strokeWidth;
         if (currentstrokewidth <= 0.1){
-        newstrokewidth = currentstrokewidth - 0.01;
+        	newstrokewidth = currentstrokewidth - 0.01;
         } else if (currentstrokewidth <= 2){
-        newstrokewidth = currentstrokewidth - 0.1;
+        	newstrokewidth = currentstrokewidth - 0.1;
         } else {
-        newstrokewidth = currentstrokewidth - 1;
+        	newstrokewidth = currentstrokewidth - 1;
         }
 
         if (newstrokewidth <= 0) {
-            newstrokewidth = 0;
+            newstrokewidth = 0.1;
         }
         pgitem.strokeWidth = newstrokewidth;
-        
+
         // alert (currentstrokewidth);
         // clearme.strokeColor = newRGBColor;
       }

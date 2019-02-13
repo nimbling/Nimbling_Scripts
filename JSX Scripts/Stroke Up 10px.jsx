@@ -11,7 +11,7 @@ if ( app.documents.length > 0 ) {
         var currentstrokewidth;
         var newstrokewidth;
         currentstrokewidth = pgitem.strokeWidth;
-        newstrokewidth = currentstrokewidth + 10;
+        newstrokewidth = Math.round(currentstrokewidth + 10);
         pgitem.strokeWidth = newstrokewidth;
         
         // alert (currentstrokewidth);
