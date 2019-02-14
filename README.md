@@ -91,19 +91,11 @@ this pops up a little dialog with the layer name preselected.
 I have it bound to **CMD OPTION R**
 I export PNG's so I use this **ALL DAY LONG**
 
-Zoom And Center Selection Animated
+Center and Zoom view to Selection (Animated)
 --------
-A script centers your viewport on your selection, and zooms to it.
-Additionally, this script does so using some easing.
-There are two versions of this script: one that does, and one that does not switch to outlines while moving your view.
+Centers your viewport on your selection while zooming to it.
+One version switches to outlines while moving your view, the other does not.
 ![](<images/zoomie.gif>)
-
-Rename / Lock Layer
---------
-Is moving your mouse all the way to your layer palette wearing you down? Did you wish you could lock the current layer using a shortcut? These scripts got your back.
-
-![](<images/Rename%20Layer.png>)
-![](<images/Layer%20Lock.png>)
 
 Center to artboard
 --------
@@ -112,6 +104,13 @@ It's only weakness is that it fails on clipping paths, as it takes the bounds of
 I have it bound to **CTRL OPTION CMD C**
 
 ![](<images/Center%20to%20Artboard.png>)
+
+Rename / Lock Layer
+--------
+Is moving your mouse all the way to your layer palette wearing you down? Did you wish you could lock the current layer using a shortcut? These scripts got your back.
+
+![](<images/Rename%20Layer.png>)
+![](<images/Layer%20Lock.png>)
 
 Reverse path
 --------
