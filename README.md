@@ -91,6 +91,13 @@ this pops up a little dialog with the layer name preselected.
 I have it bound to **CMD OPTION R**
 I export PNG's so I use this **ALL DAY LONG**
 
+Zoom And Center Selection Animated
+--------
+A script centers your viewport on your selection, and zooms to it.
+Additionally, this script does so using some easing.
+There are two versions of this script: one that does, and one that does not switch to outlines while moving your view.
+![](<images/zoomie.png>)
+
 Rename / Lock Layer
 --------
 Is moving your mouse all the way to your layer palette wearing you down? Did you wish you could lock the current layer using a shortcut? These scripts got your back.
