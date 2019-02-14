@@ -96,7 +96,7 @@ Zoom And Center Selection Animated
 A script centers your viewport on your selection, and zooms to it.
 Additionally, this script does so using some easing.
 There are two versions of this script: one that does, and one that does not switch to outlines while moving your view.
-![](<images/zoomie.png>)
+![](<images/zoomie.gif>)
 
 Rename / Lock Layer
 --------
