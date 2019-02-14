@@ -95,6 +95,7 @@ Center and Zoom view to Selection (Animated)
 --------
 Centers your viewport on your selection while zooming to it.
 One version switches to outlines while moving your view, the other does not.
+
 ![](<images/zoomie.gif>)
 
 Center to artboard
