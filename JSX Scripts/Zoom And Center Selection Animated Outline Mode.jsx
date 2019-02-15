@@ -1,8 +1,3 @@
-//Zoom And Center Selection Animated Outline Mode.jsx
-//	Zooms active view to selected object(s), eased
-//  Hacked together by Herman van Boeijen, www.nimbling.com 02-2019
-//  Big thanks to Akinuri for the version I based this on, John Wundes for the initial concept, and Robert Penner for his easing equations
-
 function wait(ms) {
     var d = new Date();
     var d2 = null;
@@ -28,54 +23,54 @@ function easeInOutCubic(t, b, c, d) { // cubic easing in/out - acceleration unti
     if (t < 1) return c / 2 * t * t * t + b;
     t -= 2;
     return c / 2 * (t * t * t + 2) + b;
-};
+}
 
 function easeInQuad(t, b, c, d) { // quadratic easing in - accelerating from zero velocity
     t /= d;
     return c * t * t + b;
-};
+}
 
 function easeOutQuad(t, b, c, d) { // quadratic easing out - decelerating to zero velocity
     t /= d;
     return -c * t * (t - 2) + b;
-};
+}
 
 function easeInOutQuad(t, b, c, d) { // quadratic easing in/out - acceleration until halfway, then deceleration
     t /= d / 2;
     if (t < 1) return c / 2 * t * t + b;
     t--;
     return -c / 2 * (t * (t - 2) - 1) + b;
-};
+}
 
 function easeInQuart(t, b, c, d) { // quartic easing in - accelerating from zero velocity
     t /= d;
     return c * t * t * t * t + b;
-};
+}
 
 function easeOutQuart(t, b, c, d) { // quartic easing out - decelerating to zero velocity
     t /= d;
     t--;
     return -c * (t * t * t * t - 1) + b;
-};
+}
 
 function easeInOutQuart(t, b, c, d) { // quartic easing in/out - acceleration until halfway, then deceleration
     t /= d / 2;
     if (t < 1) return c / 2 * t * t * t * t + b;
     t -= 2;
     return -c / 2 * (t * t * t * t - 2) + b;
-};
+}
 
 function easeInCubic(t, b, c, d) { // cubic easing in - accelerating from zero velocity
     t /= d;
     return c * t * t * t + b;
-};
+}
 
 
 function easeOutCubic(t, b, c, d) { // cubic easing out - decelerating to zero velocity
     t /= d;
     t--;
     return c * (t * t * t + 1) + b;
-};
+}
 
 function tweenCubicInOut(t, b, c, d) { //QUARTIC EASE IN/OUT - accel halfway, decel other half
     t = t / (d / 2);
@@ -93,7 +88,7 @@ function easeInOutQuad(t, b, c, d) { // quadratic easing in/out - acceleration u
     if (t < 1) return c / 2 * t * t + b;
     t--;
     return -c / 2 * (t * (t - 2) - 1) + b;
-};
+}
 
 function calcRect(rectArray) {
     var rect = {
@@ -249,6 +244,7 @@ function calcZoom(viewRect, goToRect, margin) {
 
 
 function fitSel(document) {
+var goToRect;
 
     if (activeDocument.selection.length > 0) {
         mySelection = activeDocument.selection;
@@ -263,12 +259,12 @@ function fitSel(document) {
             //check rest of group if any
             for (i = 1; i < mySelection.length; i++) {
                 groupBounds = mySelection[i].visibleBounds;
-                if (groupBounds[0] < ul_x) { ul_x = groupBounds[0] }
-                if (groupBounds[1] > ul_y) { ul_y = groupBounds[1] }
-                if (groupBounds[2] > lr_x) { lr_x = groupBounds[2] }
-                if (groupBounds[3] < lr_y) { lr_y = groupBounds[3] }
+                if (groupBounds[0] < ul_x) { ul_x = groupBounds[0];}
+                if (groupBounds[1] > ul_y) { ul_y = groupBounds[1];}
+                if (groupBounds[2] > lr_x) { lr_x = groupBounds[2];}
+                if (groupBounds[3] < lr_y) { lr_y = groupBounds[3];}
             }
-            var goToRect = calcRect([ul_x, ul_y, lr_x, lr_y]);
+            goToRect = calcRect([ul_x, ul_y, lr_x, lr_y]);
         }
     } else {
         // Extents of Artboards
@@ -276,7 +272,7 @@ function fitSel(document) {
         
         //Extents of EVERYTHING
         // var goToRect = calcRect(app.activeDocument.geometricBounds);
-        var goToRect = calcRect(app.activeDocument.geometricBounds);
+        goToRect = calcRect(app.activeDocument.geometricBounds);
     }
 
     var view = document.views[0];
@@ -287,35 +283,34 @@ function fitSel(document) {
     
     
     if (activeDocument.selection.length > 0) {
-        var targetZoom = calcZoom(viewRect, goToRect, 500);}
+        targetZoom = calcZoom(viewRect, goToRect, 500);}
     else {
-        var targetZoom = 0.1;
+        targetZoom = 0.1;
     }
 
     var startpoint = activeDocument.views[0].centerPoint;
     var endpoint = goToRect.center;
 
-    amountofsteps = 50;
+    amountofsteps = 100;
     Xdelta = endpoint[0] - startpoint[0];
     Ydelta = endpoint[1] - startpoint[1];
     zoomDelta = targetZoom - startzoom;
     // alert(zoomDelta);
 
-    for (i = 1; i < amountofsteps; i++) {
+    for (i = 1; i <= amountofsteps; i++) {
         // Time - Value - Delta - Duration
 
         centerX = easeInOutQuad(i, startpoint[0], Xdelta, amountofsteps);
         centerY = easeInOutQuad(i, startpoint[1], Ydelta, amountofsteps);
         activeDocument.views[0].centerPoint = [centerX, centerY];
         view.centerPoint = [centerX, centerY];
-
         if (zoomDelta > 0) {
             zoomie = easeInQuart(i, startzoom, zoomDelta, amountofsteps); //easeInCubic
         } else {
             zoomie = easeOutQuart(i, startzoom, zoomDelta, amountofsteps); //easeOutQuart
         }
         view.zoom = zoomie;
-        wait(7);
+        // wait(5);
     }
 }
 
