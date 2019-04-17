@@ -11,16 +11,9 @@ if ( app.documents.length > 0 ) {
         var currentstrokewidth;
         var newstrokewidth;
         currentstrokewidth = pgitem.strokeWidth;
-        if (currentstrokewidth < 0.1){
-        	newstrokewidth = currentstrokewidth + 0.01;
-        	pgitem.strokeWidth = newstrokewidth;
-        } else if (currentstrokewidth < 2){
-        	newstrokewidth = currentstrokewidth + 0.1;
-        	pgitem.strokeWidth = newstrokewidth;
-        } else {
         	newstrokewidth = currentstrokewidth + 1;
         	pgitem.strokeWidth = newstrokewidth;
-        }
+       
         // alert (currentstrokewidth);
 				// alert (pgitem.StrokeAlignment);
 
