@@ -108,6 +108,7 @@ I have it bound to **CTRL OPTION CMD C**
 
 Resize Artboard Scripts
 --------
+![](<JSX Scripts/Resize Artboard + Artwork.jsx>)
 * Resize Artboard + Artwork:
     * Resize the current artboard, along with it's contents.
 
