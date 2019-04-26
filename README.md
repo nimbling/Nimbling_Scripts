@@ -108,13 +108,13 @@ I have it bound to **CTRL OPTION CMD C**
 
 Resize Artboard Scripts
 --------
-* ![Resize Artboard + Artwork.jsx](<JSX Scripts/Resize Artboard + Artwork.jsx>)
+* [Resize Artboard + Artwork.jsx](<JSX Scripts/Resize Artboard + Artwork.jsx>)
     * Resize the current artboard, along with it's contents.
 
-* ![Resize all Artboards + Artwork.jsx](<JSX Scripts/Resize all Artboards + Artwork.jsx>)
+* [Resize all Artboards + Artwork.jsx](<JSX Scripts/Resize all Artboards + Artwork.jsx>)
     * Resize all artboards in this file, along with their contents.
 
-* ![Resize all Artboards in all Files in Folder.jsx](<JSX Scripts/Resize all Artboards in all Files in Folder.jsx>)
+* [Resize all Artboards in all Files in Folder.jsx](<JSX Scripts/Resize all Artboards in all Files in Folder.jsx>)
     * Prompts for a folder, and resizes all artboards in all files found in it, along with their contents.
 
 Rename / Lock Layer
