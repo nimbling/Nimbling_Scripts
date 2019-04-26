@@ -108,14 +108,14 @@ I have it bound to **CTRL OPTION CMD C**
 
 Resize Artboard Scripts
 --------
-Resize Artboard + Artwork:
-Resize the current artboard, along with it's contents.
+* Resize Artboard + Artwork:
+ * Resize the current artboard, along with it's contents.
 
-Resize all Artboards + Artwork
-Resize all artboards in this file, along with their contents.
+* Resize all Artboards + Artwork
+ * Resize all artboards in this file, along with their contents.
 
-Resize all Artboards in all Files in Folder
-Prompts for a folder, and resizes all artboards in all files found in it, along with their contents.
+* Resize all Artboards in all Files in Folder
+ * Prompts for a folder, and resizes all artboards in all files found in it, along with their contents.
 
 Rename / Lock Layer
 --------
