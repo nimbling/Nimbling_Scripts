@@ -2,34 +2,34 @@
 
 
 // requiredABsize = prompt('Resize artboard to?\n\nSize first, Side second\n\nThis script uses \"Scale Strokes and Effects\" for you.\n\n', '500', 'Select artboard area');
-
-var win = new Window ("dialog", "Scale Artboard with contents", undefined );  
+function main(){
+var win = new Window ("dialog", "Resize Artboard", undefined );  
 win.alignChildren = "center";
-win.minimumSize.width = 150;
-win.Maxsize = win.add ("radiobutton", undefined, "Smallest Side is:");  
-win.Minsize = win.add ("radiobutton", undefined, "Largest Side is:");
+
+win.text1 = win.add ("statictext", undefined, "Make the");
+
+win.minimumSize.width = 200;
+win.Maxsize = win.add ("radiobutton", undefined, "Smallest Side");  
+win.Minsize = win.add ("radiobutton", undefined, "Largest Side");
 win.Maxsize.value = true;
 
 win.requiredABsize = win.add ("edittext", undefined, "500");
 win.requiredABsize.minimumSize.width = 110;
 win.requiredABsize.active = true;
 
+win.text1 = win.add ("statictext", undefined, "Pixels");
+
 win.cancelBtn = win.add("button", undefined, "Cancel");    
 win.quitBtn = win.add("button", undefined, "OK");    
 win.defaultElement = win.quitBtn;    
 win.cancelElement = win.cancelBtn;  
-
-
-
 
 var activeDoc = app.activeDocument;
 var originalOrigin = activeDoc.rulerOrigin;
 var abActive = activeDoc.artboards[activeDoc.artboards.getActiveArtboardIndex()];
 var abProps = getArtboardBounds(abActive);
 
-
-
-if (win.show() == 1){  
+if (win.show() == 1){
  if (win.Minsize.value == true)  
  {
     var requiredABsize = parseInt(win.requiredABsize.text,10);
@@ -40,13 +40,12 @@ if (win.show() == 1){
     var requiredABsize = parseInt(win.requiredABsize.text,10);
     var scale = Math.max(requiredABsize / abProps.height, requiredABsize / abProps.width);
  };  
-} 
-// var scale = findRequiredScale(abProps);
+} else {
+    return;
+}
 
 app.selection = [];
-// app.executeMenuCommand ('deselectall');
 app.executeMenuCommand('selectallinartboard');
-var selection = activeDoc.selection;
 
 var artboardRight = abActive.artboardRect[2];
 var artboardBottom = abActive.artboardRect[3];
@@ -66,8 +65,9 @@ if (selection.length > 0) {
 var scaledArtboardRect = newRect(-abProps.width / 2 * scale, -abProps.height / 2 * scale, abProps.width * scale, abProps.height * scale);
 abActive.artboardRect = scaledArtboardRect;
 activeDoc.rulerOrigin = originalOrigin;
+}
+main();
 
-// Artboard bounds helper (used above):
 function getArtboardBounds(artboard) {
 
     var bounds = artboard.artboardRect,
