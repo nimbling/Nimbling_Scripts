@@ -106,6 +106,17 @@ I have it bound to **CTRL OPTION CMD C**
 
 ![](<images/Center%20to%20Artboard.png>)
 
+Resize Artboard Scripts
+--------
+Resize Artboard + Artwork:
+Resize the current artboard, along with it's contents.
+
+Resize all Artboards + Artwork
+Resize all artboards in this file, along with their contents.
+
+Resize all Artboards in all Files in Folder
+Prompts for a folder, and resizes all artboards in all files found in it, along with their contents.
+
 Rename / Lock Layer
 --------
 Is moving your mouse all the way to your layer palette wearing you down? Did you wish you could lock the current layer using a shortcut? These scripts got your back.
