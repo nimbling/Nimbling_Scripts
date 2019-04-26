@@ -1,7 +1,7 @@
 #target Illustrator
 
 
-requiredABsize = prompt('Resize artboard to?\n\nSize first, Side second\n\nThis script uses \"Scale Strokes and Effects\" for you.\n\n', '500', 'Select artboard area');
+// requiredABsize = prompt('Resize artboard to?\n\nSize first, Side second\n\nThis script uses \"Scale Strokes and Effects\" for you.\n\n', '500', 'Select artboard area');
 
 var win = new Window ("dialog", "Scale Artboard with contents", undefined );  
 win.alignChildren = "center";
@@ -9,11 +9,18 @@ win.minimumSize.width = 150;
 win.Maxsize = win.add ("radiobutton", undefined, "Smallest Side is:");  
 win.Minsize = win.add ("radiobutton", undefined, "Largest Side is:");
 win.Maxsize.value = true;
+
+win.requiredABsize = win.add ("edittext", undefined, "500");
+win.requiredABsize.minimumSize.width = 110;
+win.requiredABsize.active = true;
+
 win.cancelBtn = win.add("button", undefined, "Cancel");    
 win.quitBtn = win.add("button", undefined, "OK");    
 win.defaultElement = win.quitBtn;    
-win.cancelElement = win.cancelBtn;    
-win.active = true;
+win.cancelElement = win.cancelBtn;  
+
+
+
 
 var activeDoc = app.activeDocument;
 var originalOrigin = activeDoc.rulerOrigin;
@@ -21,13 +28,16 @@ var abActive = activeDoc.artboards[activeDoc.artboards.getActiveArtboardIndex()]
 var abProps = getArtboardBounds(abActive);
 
 
+
 if (win.show() == 1){  
  if (win.Minsize.value == true)  
- {  
+ {
+    var requiredABsize = parseInt(win.requiredABsize.text,10);
     var scale = Math.min(requiredABsize / abProps.height, requiredABsize / abProps.width);
  };  
  if (win.Maxsize.value == true)  
- {  
+ {
+    var requiredABsize = parseInt(win.requiredABsize.text,10);
     var scale = Math.max(requiredABsize / abProps.height, requiredABsize / abProps.width);
  };  
 } 
