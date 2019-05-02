@@ -1,7 +1,8 @@
 Nimbling\_Scripts
 =================
 
-Scripts to enhance graphic workflows in Illustrator and/or Mac OS X.
+Scripts to enhance Illustrator.
+Scripts to mess with the Mac OS X Finder.
 
 Some I wrote myself, some are others' work, attribution is in the scripts themselves.
 
