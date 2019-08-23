@@ -10,8 +10,12 @@ function Outliner(curDoc, selection) {
         curDoc.selection = selection[i];
         //Determine if selection is text or a path
         outlineobjecttype = String(selection[i].typename);
-        
-        if (outlineobjecttype.indexOf('Text') >= 0) {
+        if (outlineobjecttype.indexOf('GroupItem') >= 0) {
+            // app.executeMenuCommand('ungroup');
+            // alert(selection[i].pageItems.length);
+            Outliner(curDoc,selection[i].pageItems);
+            curDoc.selection = Origselection;
+        } else if (outlineobjecttype.indexOf('Text') >= 0) {
             //Hey! it's Text: let's create outlines.
             selection[i].createOutline();
         } else if (outlineobjecttype.indexOf('Path') >= 0) {
@@ -20,7 +24,6 @@ function Outliner(curDoc, selection) {
             app.executeMenuCommand('expandStyle');
         }
     }
-    curDoc.selection = null;
 }
 
 function get_document() {
@@ -51,5 +54,5 @@ function get_selection(curDoc) {
 }
 
 var curDoc = get_document();
-var selection = get_selection(curDoc);
-Outliner(curDoc, selection);
+var Origselection = get_selection(curDoc);
+Outliner(curDoc,Origselection);
