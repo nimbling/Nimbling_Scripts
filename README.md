@@ -41,6 +41,10 @@ execute the "Bottomclipper".
 
 ![](<images/VectorLips.gif>)
 
+Outline Stroke and Text
+-----------------------
+Outlines **both** strokes and text in your selection, even when they're in a group.
+It then does a "best effort" attempt to reselect what you had selected.
 
 Send behind… & Bring in Front of…
 ---------------------------------
