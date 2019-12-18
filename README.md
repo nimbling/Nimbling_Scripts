@@ -22,6 +22,21 @@ ZXP's:
 • ISO45
 • SSR30
 
+
+Alignment Scripts
+------------
+![](<images/AlignSmash.gif>)
+
+These alignment scripts can help you... align objects on your
+Illustrator canvas to one another and to the artboard they're on.
+With a single selected object, it will align to the artboard.
+Bind these to keys that make sense to you.
+I have them bound to Alt + WASD for aligning to objects,
+and to Shift + Alt + WASD for aligning to artboard.
+Alt + H and V are for Horizontal and Vertical align
+Shift + Alt + H and V are for Horizontal and Vertical align to artboard.
+Enjoy.
+
 Clip scripts
 ------------
 ![](<images/Clipper.png>)
