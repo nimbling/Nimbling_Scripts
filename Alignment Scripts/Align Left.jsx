@@ -1,40 +1,49 @@
 ﻿#target Illustrator
-//  script.grandparent = carlos canto
+//  script.grandparent = Carlos Canto
 //  script.parent = Herman van Boeijen
 //  script.elegant = false;
 
 var idoc = app.activeDocument;
-selec = idoc.selection;
+var selec = idoc.selection;
+var usePreviewB = app.preferences.getIntegerPreference('includeStrokeInBounds');
+var aligns = [];
 
-// get document bounds
-var docw = idoc.width;
-var doch = idoc.height;
+#include "AlignFunctions.jsx"
 
-if (selec.length == 1) {
-    // Align to artboard
+function alignleft(idoc, selec, usePreviewB, aligns){
+    if (selec.length > 0) {
+        var aligns = [];
+        for (var i = 0; i < selec.length; i++) {
+            if (selec[i].typename === "GroupItem" && selec[i].clipped) {
+                left = getmyleft(selec[i].pathItems[0]);
+            } else {
+                left = getmyleft(selec[i]);
+            } //FILL LEFTS
+            var thedif = left - selec[i].left;
+            var theleft = selec[i].left + thedif;
+            if (selec.length > 1) {
+                aligns.push(theleft);     
+            } else { // Align to artboard
+                var activeAB = idoc.artboards[idoc.artboards.getActiveArtboardIndex()];
+                var docLeft = activeAB.artboardRect[0], docTop = activeAB.artboardRect[1], docRight = activeAB.artboardRect[2], docBottom = activeAB.artboardRect[3];
+                aligns.push(docLeft);
+            }
+        }
 
-    var activeAB = idoc.artboards[idoc.artboards.getActiveArtboardIndex()]; // get active AB
-    docLeft = activeAB.artboardRect[0];
-    docTop = activeAB.artboardRect[1];
-    docRight = activeAB.artboardRect[2];
-    docBottom = activeAB.artboardRect[3];
-    
-    // get selection bounds
-    var sel = idoc.selection[0];
+        aligned = Math.min.apply(null, aligns);
 
-    sel.left = docLeft; // dito for Left
-
-} else if (selec.length > 1) {
-    var aligns = [];
-
-    for (var i = 0; i < selec.length; i++) {
-        aligns.push(selec[i].left);
+        for (var i = 0; i < selec.length; i++) {   
+            if (selec[i].typename === "GroupItem" && selec[i].clipped) {
+                left = getmyleft(selec[i].pathItems[0]);
+            } else {
+                left = getmyleft(selec[i]);
+            }
+        //ALIGN MULTIPLE OBJECTS
+        var thedif = left - selec[i].left;
+        selec[i].left = aligned - thedif;
+        }    
+    } else {
+    alert("no object(s) selected")
     }
-    aligned = Math.min.apply(null, aligns);
-
-    for (var i = 0; i < selec.length; i++) {
-        selec[i].left = aligned;
-    }    
-} else {
-  alert("no object(s) selected")
 }
+alignleft(idoc, selec, usePreviewB, aligns);

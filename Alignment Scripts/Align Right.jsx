@@ -4,43 +4,57 @@
 //  script.elegant = false;
 
 var idoc = app.activeDocument;
-selec = idoc.selection;
+var selec = idoc.selection;
+var usePreviewB = app.preferences.getIntegerPreference('includeStrokeInBounds');
+var aligns = [];
 
-// get document bounds
-var docw = idoc.width;
-var doch = idoc.height;
+#include "AlignFunctions.jsx"
 
-if (selec.length == 1) {
-    // Align to artboard
+function alignright(idoc, selec, usePreviewB, aligns){
+    if (selec.length > 0) {
+        for (var i = 0; i < selec.length; i++) {
+            if (selec[i].typename === "GroupItem" && selec[i].clipped) { //CLIP
+                left = getmyleft(selec[i].pathItems[0]);
+                width = getmywidth(selec[i].pathItems[0]);
+            } else {
+                left = getmyleft(selec[i]);
+                width = getmywidth(selec[i]);
+            }
+            fakewidth = selec[i].width;
+            fakeleft = selec[i].left;
+            fakeright = fakeleft + fakewidth;
+            actualright = left + width;
+            thedif = fakeleft - actualright;
+            theright = actualright;    
+            if (selec.length > 1) {
+                aligns.push(theright);     
+            } else { // Align to artboard
+                activeAB = idoc.artboards[idoc.artboards.getActiveArtboardIndex()];
+                docLeft = activeAB.artboardRect[0], docTop = activeAB.artboardRect[1], docRight = activeAB.artboardRect[2], docBottom = activeAB.artboardRect[3];
+                aligns.push(docRight);
+            }
+        }
 
-    var activeAB = idoc.artboards[idoc.artboards.getActiveArtboardIndex()]; // get active AB
-    docLeft = activeAB.artboardRect[0];
-    docTop = activeAB.artboardRect[1];
-    docRight = activeAB.artboardRect[2];
-    docBottom = activeAB.artboardRect[3];
+        aligned = Math.max.apply(null, aligns);
 
-    // get selection bounds
-    var sel = idoc.selection[0];
-
-    sel.left = docRight-sel.width;
-
-} else if (selec.length > 1) {
-    var aligns = [];
-
-    for (var i = 0; i < selec.length; i++) {
-        // get selection bounds
-        var sel = idoc.selection[i];
-
-        right = selec[i].left + sel.width;
-        aligns.push(right);
+        for (var i = 0; i < selec.length; i++) {   
+            if (selec[i].typename === "GroupItem" && selec[i].clipped) {
+                left = getmyleft(selec[i].pathItems[0]);
+                width = getmywidth(selec[i].pathItems[0]);
+            } else {
+                left = getmyleft(selec[i]);
+                width = getmywidth(selec[i]);
+            }
+            fakewidth = selec[i].width;
+            fakeleft = selec[i].left;
+            fakeright = fakeleft + fakewidth;
+            actualright = left + width;
+            thedif = fakeleft - actualright;
+            theright = actualright;
+            selec[i].left = aligned + thedif;
+        }
+    } else {
+    alert("no object(s) selected")
     }
-    aligned = Math.max.apply(null, aligns);
-
-    for (var i = 0; i < selec.length; i++) {
-        var sel = idoc.selection[i];
-
-        selec[i].left = aligned-sel.width;
-    }    
-} else {
-  alert("no object(s) selected")
 }
+alignright(idoc, selec, usePreviewB, aligns);

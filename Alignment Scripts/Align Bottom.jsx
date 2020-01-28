@@ -1,44 +1,60 @@
 ﻿#target Illustrator
-//  script.grandparent = carlos canto
+//  script.grandparent = Carlos Canto
 //  script.parent = Herman van Boeijen
 //  script.elegant = false;
 
 var idoc = app.activeDocument;
-selec = idoc.selection;
+var selec = idoc.selection;
+var usePreviewB = app.preferences.getIntegerPreference('includeStrokeInBounds');
+var aligns = [];
 
-// get document bounds
-var docw = idoc.width;
-var doch = idoc.height;
+#include "AlignFunctions.jsx"
 
-if (selec.length == 1) {
-    // Align to artboard
+function alignbot(idoc, selec, usePreviewB, aligns){
+    if (selec.length > 0) {
+        for (var i = 0; i < selec.length; i++) {
+            if (selec[i].typename === "GroupItem" && selec[i].clipped) {
+                top = getmytop(selec[i].pathItems[0]);
+                height = getmyheight(selec[i].pathItems[0]);
+            } else {
+                top = getmytop(selec[i]);
+                height = getmyheight(selec[i]);
+            }
+            fakeheight = selec[i].height;
+            faketop = selec[i].top;
+            fakebottom = faketop + fakeheight;
+            actualbottom = top + height;
+            thedif = faketop - actualbottom;
+            thebottom = actualbottom;
+            if (selec.length > 1) {
+                aligns.push(thebottom);     
+            } else { // Align to artboard
+                activeAB = idoc.artboards[idoc.artboards.getActiveArtboardIndex()];
+                docLeft = activeAB.artboardRect[0], docTop = activeAB.artboardRect[1], docRight = activeAB.artboardRect[2], docBottom = activeAB.artboardRect[3];
+                aligns.push(docBottom);
+            }
+        }
 
-    var activeAB = idoc.artboards[idoc.artboards.getActiveArtboardIndex()]; // get active AB
-    docLeft = activeAB.artboardRect[0];
-    docTop = activeAB.artboardRect[1];
-    docRight = activeAB.artboardRect[2];
-    docBottom = activeAB.artboardRect[3];
+        aligned = Math.min.apply(null, aligns);
 
-    // get selection bounds
-    var sel = idoc.selection[0];
-
-    sel.top = docBottom+sel.height;
-
-} else if (selec.length > 1) {
-    var aligns = [];
-
-    for (var i = 0; i < selec.length; i++) {
-        // get selection bounds
-        var sel = idoc.selection[i];
-        bottom = selec[i].top - sel.height;
-        aligns.push(bottom);
+        for (var i = 0; i < selec.length; i++) {   
+            if (selec[i].typename === "GroupItem" && selec[i].clipped) {
+                top = getmytop(selec[i].pathItems[0]);
+                height = getmyheight(selec[i].pathItems[0]);
+            } else {
+                top = getmytop(selec[i]);
+                height = getmyheight(selec[i]);
+            }
+            fakeheight = selec[i].height;
+            faketop = selec[i].top;
+            fakebottom = faketop + fakeheight;
+            actualbottom = top + height;
+            thedif = faketop - actualbottom;
+            thebottom = actualbottom;
+            selec[i].top = aligned + thedif;
+        }
+    } else {
+    alert("no object(s) selected")
     }
-    aligned = Math.min.apply(null, aligns);
-
-    for (var i = 0; i < selec.length; i++) {
-        var sel = idoc.selection[i];
-        selec[i].top = aligned + sel.height;
-    }    
-} else {
-  alert("no object(s) selected")
 }
+alignbot(idoc, selec, usePreviewB, aligns);
