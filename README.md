@@ -27,6 +27,8 @@ Alignment Scripts
 ------------
 ![](<images/AlignSmash.gif>)
 
+https://github.com/nimbling/Nimbling_Scripts/tree/master/Alignment%20Scripts
+
 These alignment scripts can help you... align objects on your
 Illustrator canvas to one another and to the artboard they're on.
 With a single selected object, it will align to the artboard.
@@ -35,7 +37,9 @@ I have them bound to Alt + WASD for aligning to objects,
 and to Shift + Alt + WASD for aligning to artboard.
 Alt + H and V are for Horizontal and Vertical align
 Shift + Alt + H and V are for Horizontal and Vertical align to artboard.
-Enjoy.
+Alt + C is for centering on both axes, with shift, again, forcing it to the artboard.
+
+Enjoy :)
 
 Clip scripts
 ------------
