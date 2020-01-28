@@ -1,7 +1,9 @@
 ﻿#target Illustrator
-//  script.grandparent = Carlos Canto
+//  script.grandparent = carlos canto
 //  script.parent = Herman van Boeijen
 //  script.elegant = false;
+oldcoordinateSystem = app.coordinateSystem;
+app.coordinateSystem = CoordinateSystem.ARTBOARDCOORDINATESYSTEM;
 
 var idoc = app.activeDocument;
 var selec = idoc.selection;
@@ -40,3 +42,5 @@ if (selec.length > 0) {
 } else {
   alert("no object(s) selected")
 }
+
+app.coordinateSystem = oldcoordinateSystem;

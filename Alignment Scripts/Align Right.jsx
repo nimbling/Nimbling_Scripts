@@ -2,6 +2,8 @@
 //  script.grandparent = carlos canto
 //  script.parent = Herman van Boeijen
 //  script.elegant = false;
+oldcoordinateSystem = app.coordinateSystem;
+app.coordinateSystem = CoordinateSystem.ARTBOARDCOORDINATESYSTEM;
 
 var idoc = app.activeDocument;
 var selec = idoc.selection;
@@ -58,3 +60,5 @@ function alignright(idoc, selec, usePreviewB, aligns){
     }
 }
 alignright(idoc, selec, usePreviewB, aligns);
+
+app.coordinateSystem = oldcoordinateSystem;
