@@ -22,6 +22,21 @@ ZXP's:
 • ISO45
 • SSR30
 
+Nimble Bundle
+------------
+A compilation of 40+ Illustrator scripts.  
+Use by installing hammerspoon (free) and filling out a single path.  
+1. install https://www.hammerspoon.org/
+2. download and unpack this zip somewhere on your drive, copy the path
+3. paste the following in your "init.lua"
+
+Illustratorscriptsfolder = "/Users/username/Illustrator Scripts/"
+package.path=Illustratorscriptsfolder.."?.lua"..";"..package.path
+hs.application.enableSpotlightForNameSearches(true)
+require("illustrator")
+
+4. make sure the **Illustratorscriptsfolder =** bit points to the path where you unpacked the zip. Include a trailing slash.
+5. restart hammerspoon. You should see a message saying *illustrator helper scripts loaded*.
 
 Alignment Scripts
 ------------
