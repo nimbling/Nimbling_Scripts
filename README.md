@@ -1,15 +1,13 @@
 Nimbling\_Scripts
 =================
-
 Scripts to enhance Illustrator.  
-Scripts to mess with the Mac OS X Finder.  
-Some I wrote myself, some are others' work, attribution is in the scripts themselves.  
+Most I wrote myself, some are others' work, attribution is in the scripts themselves.  
 
 Illustrator Panels
 ------------
-Three panels for use in Illustrator, packaging some of the scripts found below.
-Use https://aescripts.com/learn/zxp-installer/ to install them.
-ZXP's:
+Three panels for use in Illustrator, packaging some of the scripts found below.  
+Use https://aescripts.com/learn/zxp-installer/ to install them.  
+ZXP's:  
 • Nimbling CLippers
 • ISO45
 • SSR30
