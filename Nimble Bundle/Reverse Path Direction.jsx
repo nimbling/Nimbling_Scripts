@@ -1,0 +1,1 @@
+app.executeMenuCommand ('Reverse Path Direction');
