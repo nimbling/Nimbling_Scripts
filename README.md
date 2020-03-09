@@ -1,17 +1,9 @@
 Nimbling\_Scripts
 =================
 
-Scripts to enhance Illustrator.
-
-Scripts to mess with the Mac OS X Finder.
-
-Some I wrote myself, some are others' work, attribution is in the scripts themselves.
-
-I have these scripts bound to shortcuts using redsweaters' Fastscripts -
-replacing several illustrator native shortcuts (taking care to remove them from
-illustrator) and adding a few.
-
-I have them set up like this:
+Scripts to enhance Illustrator.  
+Scripts to mess with the Mac OS X Finder.  
+Some I wrote myself, some are others' work, attribution is in the scripts themselves.  
 
 Illustrator Panels
 ------------
@@ -27,7 +19,7 @@ Nimble Bundle
 A compilation of 40+ Illustrator scripts.  
 Use by installing hammerspoon (free) and filling out a single path.  
 1. install https://www.hammerspoon.org/
-2. download and unpack this zip somewhere on your drive, copy the path
+2. download and unpack [Nimble Bundle.zip](https://github.com/nimbling/Nimbling_Scripts/blob/master/Nimble%20Bundle.zip) somewhere on your drive, take note of the path
 3. paste the following in your "init.lua"
 
 Illustratorscriptsfolder = "/Users/username/Illustrator Scripts/"
