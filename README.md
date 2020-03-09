@@ -20,9 +20,9 @@ Use by installing hammerspoon (free) and filling out a single path.
 2. download and unpack [Nimble Bundle.zip](https://github.com/nimbling/Nimbling_Scripts/blob/master/Nimble%20Bundle.zip) somewhere on your drive, take note of the path
 3. paste the following in your "init.lua"
 
-Illustratorscriptsfolder = "/Users/username/Illustrator Scripts/"
-package.path=Illustratorscriptsfolder.."?.lua"..";"..package.path
-hs.application.enableSpotlightForNameSearches(true)
+Illustratorscriptsfolder = "/Users/username/Illustrator Scripts/"  
+package.path=Illustratorscriptsfolder.."?.lua"..";"..package.path  
+hs.application.enableSpotlightForNameSearches(true)  
 require("illustrator")
 
 4. make sure the **Illustratorscriptsfolder =** bit points to the path where you unpacked the zip. Include a trailing slash.
