@@ -7,10 +7,10 @@ Illustrator Panels
 ------------
 Three panels for use in Illustrator, packaging some of the scripts found below.  
 Use https://aescripts.com/learn/zxp-installer/ to install them.  
-ZXP's:  
-• Nimbling CLippers
-• ISO45
-• SSR30
+ZXP's up top:
+• Nimbling Clippers  
+• ISO45  
+• SSR30  
 
 Nimble Bundle
 ------------
