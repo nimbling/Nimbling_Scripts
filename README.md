@@ -21,8 +21,8 @@ A compilation of 40+ Illustrator [scripts](https://github.com/nimbling/Nimbling_
 3. Hammerspoon shows a menu bar icon. Click it to "open config" this will open your init.lua
 4. paste the following four lines there (the rest of it can be empty)
 * **the Illustratorscriptsfolder =** bit points to the path where you unzipped the zip,
-* do not "escape" spaces or special characters
-* include the "trailing slash"
+* do not "escape" spaces or special characters but keep the quotes before and after
+* include the slash on the end
 
 *Illustratorscriptsfolder = "/Users/username/Illustrator Scripts/"  
 package.path=Illustratorscriptsfolder.."?.lua"..";"..package.path  
