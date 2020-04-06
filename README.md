@@ -16,11 +16,11 @@ Nimble Bundle
 ------------
 A compilation of 40+ Illustrator [scripts](https://github.com/nimbling/Nimbling_Scripts/tree/master/Nimble%20Bundle).  
 **A 5 step guide on how to use on OSX:**  
-1. install [hammerspoon](https://www.hammerspoon.org/)
-2. download and unpack **[Nimble Bundle.zip](https://github.com/nimbling/Nimbling_Scripts/blob/master/Nimble%20Bundle.zip)** somewhere on your drive, take note of the path
+1. install [hammerspoon](https://www.hammerspoon.org/) **[direct link](https://github.com/Hammerspoon/hammerspoon/releases/latest)**
+2. download and unzipped **[Nimble Bundle.zip](https://github.com/nimbling/Nimbling_Scripts/blob/master/Nimble%20Bundle.zip)** somewhere on your drive, take note of the path
 3. Hammerspoon shows a menu bar icon. Click it to "open config" this will open your init.lua
 4. paste the following four lines there (the rest of it can be empty)
-* the Illustratorscriptsfolder = bit points to the path where you unpacked the zip
+* **the Illustratorscriptsfolder =** bit points to the path where you unzipped the zip,
 * do not "escape" spaces or special characters
 * include the "trailing slash"
 
