@@ -18,7 +18,8 @@ A compilation of 40+ Illustrator [scripts](https://github.com/nimbling/Nimbling_
 **How to use on OSX:**  
 1. install [hammerspoon](https://www.hammerspoon.org/)
 2. download and unpack [Nimble Bundle.zip](https://github.com/nimbling/Nimbling_Scripts/blob/master/Nimble%20Bundle.zip) somewhere on your drive, take note of the path
-3. paste the following in your "init.lua" and:
+3. Hammerspoon shows a menu bar icon. Click it to "open config" this will open your init.lua
+4. paste the following four lines there (the rest of it can be empty)
 * the Illustratorscriptsfolder = bit points to the path where you unpacked the zip
 * do not "escape" spaces or special characters
 * include the "trailing slash"
@@ -28,7 +29,7 @@ package.path=Illustratorscriptsfolder.."?.lua"..";"..package.path
 hs.application.enableSpotlightForNameSearches(true)  
 require("illustrator")*
 
-4. restart hammerspoon. You should see a message saying *illustrator helper scripts loaded*.  
+5. restart hammerspoon. You should see a message saying *illustrator helper scripts loaded*.  
 
 They're opinionated as hell and I'm sure some of my shortcuts will conflict with yours or Adobe's. Well.. they can pry "cmd+shift+h" to flip horizontal from my cold, dead hands.  
 Pro Tip: Add any other .jsx made to work with Illustrator to that folder, and modify the **illustrator.lua** file to point at that file. Add your own shortcut, and presto!
