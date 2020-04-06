@@ -18,8 +18,8 @@ A compilation of 40+ Illustrator [scripts](https://github.com/nimbling/Nimbling_
 **How to use on OSX:**  
 1. install [hammerspoon](https://www.hammerspoon.org/)
 2. download and unpack [Nimble Bundle.zip](https://github.com/nimbling/Nimbling_Scripts/blob/master/Nimble%20Bundle.zip) somewhere on your drive, take note of the path
-3. paste the following in your "init.lua" - Make sure to:
-* not "escape" spaces or special characters and
+3. paste the following in your "init.lua"
+* do not "escape" spaces or special characters
 * include the "trailing slash"
 
 *Illustratorscriptsfolder = "/Users/username/Illustrator Scripts/"  
