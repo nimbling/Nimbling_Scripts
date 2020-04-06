@@ -21,7 +21,7 @@ A compilation of 40+ Illustrator [scripts](https://github.com/nimbling/Nimbling_
 3. Hammerspoon shows a menu bar icon. Click it to find the **"open config"** this will open your init.lua
 4. paste the following four lines there (the rest of it can be empty)
 ```
-Illustratorscriptsfolder = "/Users/username/Illustrator Scripts/"  
+Illustratorscriptsfolder = "/Users/exampleuser/examplefolder/nimblescripts/"  
 package.path=Illustratorscriptsfolder.."?.lua"..";"..package.path  
 hs.application.enableSpotlightForNameSearches(true)  
 require("illustrator")
