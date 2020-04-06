@@ -27,7 +27,7 @@ package.path=Illustratorscriptsfolder.."?.lua"..";"..package.path
 hs.application.enableSpotlightForNameSearches(true)  
 require("illustrator")*
 
-4. make sure the **Illustratorscriptsfolder =** bit points to the path where you unpacked the zip. Include a trailing slash.
+4. make sure the **Illustratorscriptsfolder =** bit points to the path where you unpacked the zip.
 5. restart hammerspoon. You should see a message saying *illustrator helper scripts loaded*.  
 
 They're opinionated as hell and I'm sure some of my shortcuts will conflict with yours or Adobe's. Well.. they can pry "cmd+shift+h" to flip horizontal from my cold, dead hands.  
