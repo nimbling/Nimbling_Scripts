@@ -23,12 +23,12 @@ A compilation of 40+ Illustrator [scripts](https://github.com/nimbling/Nimbling_
 * **the Illustratorscriptsfolder =** bit points to the path where you unzipped the zip,
 * do not "escape" spaces or special characters but keep the quotes before and after
 * include the slash on the end
-
-*Illustratorscriptsfolder = "/Users/username/Illustrator Scripts/"  
+```
+Illustratorscriptsfolder = "/Users/username/Illustrator Scripts/"  
 package.path=Illustratorscriptsfolder.."?.lua"..";"..package.path  
 hs.application.enableSpotlightForNameSearches(true)  
-require("illustrator")*
-
+require("illustrator")
+```
 5. restart hammerspoon. You should see a message saying *illustrator helper scripts loaded*.  
 
 They're opinionated as hell and I'm sure some of my shortcuts will conflict with yours or Adobe's. Well.. they can pry "cmd+shift+h" to flip horizontal from my cold, dead hands.  
