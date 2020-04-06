@@ -1,10 +1,10 @@
-Nimbling\_Scripts
-=================
+# Nimbling\_Scripts
+
 Scripts to enhance Illustrator.  
 Most I wrote myself, some are others' work, attribution is in the scripts themselves.  
 
-Illustrator Panels
-------------
+## Illustrator Panels
+
 Three panels for use in Illustrator, packaging some of the scripts found below.  
 Use https://aescripts.com/learn/zxp-installer/ to install them.  
 ZXP's up top:  
@@ -12,10 +12,10 @@ ZXP's up top:
 • ISO45  
 • SSR30  
 
-Nimble Bundle
-------------
+## Nimble Bundle
+
 A compilation of 40+ Illustrator [scripts](https://github.com/nimbling/Nimbling_Scripts/tree/master/Nimble%20Bundle).  
-**A 5 step guide on how to use on OSX:**  
+### **A 5 step guide on how to use on OSX:**
 1. install [hammerspoon](https://www.hammerspoon.org/) (or use the **[direct link](https://github.com/Hammerspoon/hammerspoon/releases/latest)** to the latest release)
 2. download and unzipped **[Nimble Bundle.zip](https://github.com/nimbling/Nimbling_Scripts/blob/master/Nimble%20Bundle.zip)** somewhere on your drive, take note of the path
 3. Hammerspoon shows a menu bar icon. Click it to "open config" this will open your init.lua
@@ -34,8 +34,8 @@ require("illustrator")*
 They're opinionated as hell and I'm sure some of my shortcuts will conflict with yours or Adobe's. Well.. they can pry "cmd+shift+h" to flip horizontal from my cold, dead hands.  
 Pro Tip: Add any other .jsx made to work with Illustrator to that folder, and modify the **illustrator.lua** file to point at that file. Add your own shortcut, and presto!
 
-Alignment Scripts
-------------
+## Alignment Scripts
+
 ![](<images/AlignSmash.gif>)
 
 https://github.com/nimbling/Nimbling_Scripts/tree/master/Alignment%20Scripts
@@ -52,8 +52,8 @@ Alt + C is for centering on both axes, with shift, again, forcing it to the artb
 
 Enjoy :)
 
-Clip scripts
-------------
+## Clip scripts
+
 ![](<images/Clipper.png>)
 
 ![](<images/Bottomclipper.png>)
@@ -71,13 +71,13 @@ execute the "Bottomclipper".
 
 ![](<images/VectorLips.gif>)
 
-Outline Stroke and Text
------------------------
+## Outline Stroke and Text
+
 Outlines **both** strokes and text in your selection, even when they're in a group.
 It then does a "best effort" attempt to reselect what you had selected.
 
-Send behind… & Bring in Front of…
----------------------------------
+## Send behind… & Bring in Front of…
+
 ![](<images/Bring-in-Front-of.png>)
 
 ![](<images/Send-Behind.png>)
@@ -93,14 +93,14 @@ chosen object. *Fun fact: these even work when either object is inside- or
 outside of a clipping group, allowing you to add or remove an object from a
 clipping group super quick*
 
-Clear fill, clear stroke scripts.
---------
+## Clear fill, clear stroke scripts.
+
 Using these, you can directly clear a fill or a stroke using single shortcuts.
 I have them set up to option+/ and cmd+/ - which maps just like photoshop!
 If it's not working, use direct- or group selection tools to select your object.
 
-Stroke width and round Cap scripts
---------
+## Stroke width and round Cap scripts
+
 Increase, decrease stroke width
 
 ![](<images/Stroke%20Up.png>)
@@ -118,8 +118,8 @@ Round this stroke cap (with bonus corner rounding)
 
 **CTRL SHIFT R**
 
-Rename Artboard
---------
+## Rename Artboard
+
 this pops up a little dialog with the layer name preselected.
 
 ![](<images/Rename%20Artboard.png>)
@@ -127,23 +127,23 @@ this pops up a little dialog with the layer name preselected.
 I have it bound to **CMD OPTION R**
 I export PNG's so I use this **ALL DAY LONG**
 
-Center and Zoom view to Selection (Animated)
---------
+## Center and Zoom view to Selection (Animated)
+
 Centers your viewport on your selection while zooming to it.
 One version switches to outlines while moving your view, the other does not.
 
 ![](<images/zoomie.gif>)
 
-Center to artboard
---------
+## Center to artboard
+
 Centers your selection to the artboard you're on. I use this all day as a fast starting point to further align from.
 It's only weakness is that it fails on clipping paths, as it takes the bounds of all paths in it.
 I have it bound to **CTRL OPTION CMD C**
 
 ![](<images/Center%20to%20Artboard.png>)
 
-Resize Artboard Scripts
---------
+## Resize Artboard Scripts
+
 * [Resize Artboard + Artwork.jsx](<JSX Scripts/Resize Artboard + Artwork.jsx>)
     * Resize the current artboard, along with it's contents.
 
@@ -153,15 +153,15 @@ Resize Artboard Scripts
 * [Resize all Artboards in all Files in Folder.jsx](<JSX Scripts/Resize all Artboards in all Files in Folder.jsx>)
     * Prompts for a folder, and resizes all artboards in all files found in it, along with their contents.
 
-Rename / Lock Layer
---------
+## Rename / Lock Layer
+
 Is moving your mouse all the way to your layer palette wearing you down? Did you wish you could lock the current layer using a shortcut? These scripts got your back.
 
 ![](<images/Rename%20Layer.png>)
 ![](<images/Layer%20Lock.png>)
 
-Reverse path
---------
+## Reverse path
+
 Is your compound path misbehaving? Did you apply a nice stroke width that's the wrong way? Do you have a multi-layered appearance stack that just doesn't look right?
 Reverse path to the rescue :)
 I have it bound to **CTRL SHIFT CMD R**
@@ -169,8 +169,8 @@ I have it bound to **CTRL SHIFT CMD R**
 ![](<images/Reverse%20Path.png>)
 
 
-Outliner
---------
+## Outliner
+
 
 ![](<images/Outliner.png>)
 
@@ -181,8 +181,8 @@ Outliner
 Outline both text and stroke, using the shortcut previously reserved only for
 text.
 
-Swap object colors
-------------------
+## Swap object colors
+
 
 1.  Select exactly two objects.
 
@@ -191,8 +191,8 @@ Swap object colors
 This script swaps the colors (stroke and-or fill) of exactly TWO selected
 objects.
 
-Flip Horizontal & Vertical
---------------------------
+## Flip Horizontal & Vertical
+
 
 1.  Select a single object.
 
@@ -200,8 +200,8 @@ Flip Horizontal & Vertical
 
 Flip Horizontal and Vertical.
 
-SVG image bevel filters, for use inside of illustrator.
------------------------------
+## SVG image bevel filters, for use inside of illustrator.
+
 
 1.  Select an object or group of objects.
 2.  Got to "Effect > SVG Filters > Apply SVG filter...
@@ -212,8 +212,8 @@ SVG image bevel filters, for use inside of illustrator.
 
 ~   Slices of fruit made using these SVG filters
 
-Axonometry actions
-------------------
+## Axonometry actions
+
 
 ![](<images/iso45v.png>)
 
@@ -239,13 +239,13 @@ Axonometry actions
 ![](<http://nimbling.com/images/pr/gd-07-large.jpg>)
 
 
-Window Tiler Script (or .App)
------------------------------
+## Window Tiler Script (or .App)
+
 
 1.  Launch using your launcher of choice (Better touch tool, Alfred,
     Quicksilver, Launchbar, etc.) to tile up to 12 of your finder windows.
     
 
-Run an Illustrator script using Alfred, on a single shortcut, with auto complete
---------------------------------------------------------------------------------
+## Run an Illustrator script using Alfred, on a single shortcut, with auto complete
+
 Install "Illustrator Scripts.alfredworkflow" by double clicking it, modify the folder it looks for your scripts for in this window: ![](<images/Modify%20your%20folder.png>). I have assigned **CTRL OPTION CMD SPACE** to it (just mash the bottom row including space) and start typing what your scripts need to do.
