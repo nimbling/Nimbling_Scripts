@@ -6,6 +6,15 @@ scriptsfolder = Illustratorscriptsfolder
 -- Modify the duration of the notification
 local notifyduration = 0.6
 
+local function florp()
+  print("aaargh")
+end
+
+hs.urlevent.bind("derp", florp)
+  
+
+
+
 -- The main function running all the scripts passed
 local function runScript(thescript, notification, notifyduration)
     if notification ~= "" then
@@ -57,7 +66,7 @@ end
 
 hotkeys = hs.hotkey.modal.new()
 
-hotkeys:bind("shift", "z",           function() togglecolorfocus() end)
+-- hotkeys:bind("shift", "z",           function() togglecolorfocus() end)
 
 -- Flip horizontal and Vertical, like a human
 hotkeys:bind({"cmd", "shift"}, "h",         function() runScript("FlipH.jsx", "Flip Horizontal", notifyduration) end)
@@ -108,6 +117,7 @@ hotkeys:bind({"cmd", "alt", "ctrl"}, "s",   function() runScript("Swap Object Co
 hotkeys:bind("cmd", "h",                    function() runScript("ToggleCruft.jsx", "Toggle Edges and Bounding Box", notifyduration) end)
 hotkeys:bind({"cmd", "alt"}, "t",           function() resettransform() end)
 hotkeys:bind({"cmd", "alt", "ctrl", "shift"}, "s", function() togglescalestrokes() end)
+hotkeys:bind("alt", "o",                    function() runScript("Opacity Set.jsx", "", notifyduration) end)
 
 -- Define a callback function to be called when application events happen
 function applicationWatcherCallback(appName, eventType, appObject)
