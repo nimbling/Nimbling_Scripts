@@ -12,7 +12,7 @@ ZXP's up top:
 • ISO45  
 • SSR30  
 
-## Nimble Bundle
+# Nimble Bundle
 
 A compilation of 40+ Illustrator [scripts](https://github.com/nimbling/Nimbling_Scripts/tree/master/Nimble%20Bundle).  
 ### **A 5 step guide on how to use on OSX:**
@@ -33,6 +33,10 @@ require("illustrator")
 
 They're opinionated as hell and I'm sure some of my shortcuts will conflict with yours or Adobe's. Well.. they can pry "cmd+shift+h" to flip horizontal from my cold, dead hands.  
 Pro Tip: Add any other .jsx made to work with Illustrator to that folder, and modify the **illustrator.lua** file to point at that file. Add your own shortcut, and presto!
+
+-----
+### Most of the following scripts are bundled in the Nimble Bundle
+
 
 ## Alignment Scripts
 
