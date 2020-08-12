@@ -102,7 +102,7 @@ hotkeys:bind({"alt", "shift"}, "]",         function() runScript("Stroke Up 10px
 hotkeys:bind({"alt", "shift"}, "[",         function() runScript("Stroke Down 10px.jsx", " ▶︎ ● ◀︎", 0.3) end)
 hotkeys:bind({"alt", "ctrl"}, "]",          function() runScript("Stroke Up dot1.jsx", " ◀︎ • ▶︎", 0.3) end)
 hotkeys:bind({"alt", "ctrl"}, "[",          function() runScript("Stroke Down dot1.jsx", " ▶︎ • ◀︎", 0.3) end)
-hotkeys:bind({"cmd", "shift", "ctrl"}, "r", function() runScript("Stroke Rounded Caps.jsx", "Round Stroke Caps and Corners", 2) end)
+hotkeys:bind({"cmd", "shift", "ctrl"}, "r", function() runScript("Stroke Rounded Caps.jsx", "Stroke Toggle", 2) end)
 -- Reverse path direction (useful when compund paths are misbehaving)
 hotkeys:bind({"cmd", "alt", "ctrl"}, "r",   function() runScript("Reverse Path Direction.jsx", "Reverse Path Direction", 1.5) end)
 hotkeys:bind({"cmd", "shift"}, "o",         function() runScript("Outline Stroke and Text.jsx", "Outline Stroke and Text", 1) end)
@@ -117,8 +117,11 @@ hotkeys:bind({"cmd", "alt", "ctrl"}, "s",   function() runScript("Swap Object Co
 hotkeys:bind("cmd", "h",                    function() runScript("ToggleCruft.jsx", "Toggle Edges and Bounding Box", notifyduration) end)
 hotkeys:bind({"cmd", "alt"}, "t",           function() resettransform() end)
 hotkeys:bind({"cmd", "alt", "ctrl", "shift"}, "s", function() togglescalestrokes() end)
+hotkeys:bind({"ctrl", "alt", "cmd"}, "h", function() runScript("Hard Export.jsx", "Hard Export", notifyduration) end)
+hotkeys:bind({"ctrl", "alt", "cmd"}, "w", function() runScript("Hard Close.jsx", "Hard Close", 1.5) end)
 hotkeys:bind("alt", "o",                    function() runScript("Opacity Set.jsx", "", notifyduration) end)
-
+hotkeys:bind({"cmd", "shift", "alt", "ctrl"}, "i", function() runScript("ImportPNGtoArtboardGrid.jsx", "Import Files to Grid", 0) end)
+hotkeys:bind("ctrl", "z",                   function() runScript("Zoom And Center Selection Animated.jsx", "", notifyduration) end)
 -- Define a callback function to be called when application events happen
 function applicationWatcherCallback(appName, eventType, appObject)
   if (appName == "Adobe Illustrator 2020") then
