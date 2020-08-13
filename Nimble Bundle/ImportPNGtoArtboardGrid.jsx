@@ -53,7 +53,8 @@ function importFolderAsLayers(selectedFolder) {
 		  if( (fileName.indexOf(".png") == -1) ) {
 			continue;
 		  } else {
-			prettyname = fileName.substring(0, fileName.indexOf(".") );
+			var cutpoint = fileName.lastIndexOf(".");
+			prettyname = fileName.substring(0, cutpoint );
 			if( firstImageLayer ) {
 			  newLayer = doc.layers[0];
 			  firstImageLayer = false;
