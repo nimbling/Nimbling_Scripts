@@ -20,6 +20,7 @@ A compilation of 40+ Illustrator [scripts](https://github.com/nimbling/Nimbling_
 2. download and unzip **[Nimble Bundle.zip](https://github.com/nimbling/Nimbling_Scripts/blob/master/Nimble%20Bundle.zip)** somewhere practical on your drive, take note of the path
 3. Hammerspoon shows a menu bar icon. Click it to find the **"open config"** this will open your init.lua
 4. paste the following four lines there (the rest of it can be empty)
+Alternatively, use this utility to launch them: [mac](https://tama-san.com/spai/) / [windows](http://sysys.zouri.jp/sppy/).
 ```
 Illustratorscriptsfolder = "/Users/exampleuser/examplefolder/nimblescripts/"  
 package.path=Illustratorscriptsfolder.."?.lua"..";"..package.path  
