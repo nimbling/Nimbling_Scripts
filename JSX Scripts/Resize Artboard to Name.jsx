@@ -12,8 +12,8 @@ if ( app.documents.length > 0) {
     //var Newname = prompt("Rename Artboard", voorzet);
     
     var sizes = voorzet.split(" - ")[1];
-    var width = sizes.split(" x ")[0];
-    var height = sizes.split(" x ")[1];
+    var width = voorzet.split(" x ")[0];
+    var height = voorzet.split(" x ")[1];
     // alert (width +" "+ height);
 
     var artPoints = doc.artboards[i].artboardRect;
