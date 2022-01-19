@@ -1,72 +1,56 @@
 hs.alert.show("Illustrator helper\nscripts loaded", 3.5)
 
--- What is Illustrator called on your system?
-illuinstall = "Adobe Illustrator 2020"
+-- What is Illustrator called on your system? (Hover over the icon in your Dock to find out)
+illuinstall = "Adobe Illustrator 2022"
 scriptsfolder = Illustratorscriptsfolder
 -- Modify the duration of the notification
 local notifyduration = 0.6
-
-local function florp()
-  print("aaargh")
-end
-
-hs.urlevent.bind("derp", florp)
-  
-
-
 
 -- The main function running all the scripts passed
 local function runScript(thescript, notification, notifyduration)
     if notification ~= "" then
         hs.alert.show(notification, notifyduration)
     end
-    local thecommand = "open -a " .. "\"Adobe Illustrator\" " .. "\"" .. scriptsfolder .. thescript .. "\""
-    -- print(thecommand) -- for debugging
-    os.execute(thecommand, false)   
+    if thecommand ~= "" then
+      local thecommand = "open -a " .. "\"Adobe Illustrator\" " .. "\"" .. scriptsfolder .. thescript .. "\""
+      print(thecommand) -- for debugging
+      os.execute(thecommand, false)   
+    end
 end
 
 -- function to reset the bounding box
-local illuapp = hs.appfinder.appFromName(illuinstall)
-local function resettransform()
-    hs.eventtap.keyStrokes("e")
-    illuapp:selectMenuItem("Reset Bounding Box")
-    hs.eventtap.keyStrokes("v")
-    hs.alert.show("Transform reset", 1.5)
+-- local illuapp = hs.appfinder.appFromName(illuinstall)
+-- local function resettransform()
+--     hs.eventtap.keyStrokes("e")
+--     illuapp:selectMenuItem("Reset Bounding Box")
+--     hs.eventtap.keyStrokes("v")
+--     
+--     hs.alert.show("Transform reset", 1.5)
+-- end
+
+local function sendshiftj()
+  hs.eventtap.keyStroke({"shift"}, "j")
 end
 
--- function to toggle scaling strokes and effects
-local function togglescalestrokes()
-  local currentscalestate = hs.execute("defaults read com.illhelpers.togsf scalestate", true)
-  print(currentscalestate)
-  if currentscalestate == "donotscale\n" then
-    hs.osascript.applescript("tell application \"" .. illuinstall .. "\"\n do script \"ScaleStrokeFX\" from \"Helpers\" without dialogs\nend tell")
-    hs.execute("defaults write com.illhelpers.togsf scalestate doscale", true)
-  else
-    hs.osascript.applescript("tell application \"" .. illuinstall .. "\"\n do script \"DoNotScaleStrokeFX\" from \"Helpers\" without dialogs\nend tell")
-    hs.execute("defaults write com.illhelpers.togsf scalestate donotscale", true)
-  end
-end
 
+local currentcolorfocus = true
 local function togglecolorfocus()
-  local currentcolorfocus = hs.execute("defaults read com.illhelpers.togsf colorfocus", true)
-    if currentcolorfocus == "fill\n" then
+    if currentcolorfocus == true then
     hs.alert.defaultStyle.textSize =  80
-    hs.alert.show(" ☐", 0.4)
-    hs.osascript.applescript("tell application \"" .. illuinstall .. "\"\n do script \"FocusOnStroke\" from \"Helpers\" without dialogs\nend tell")
-    hs.execute("defaults write com.illhelpers.togsf colorfocus stroke", true)
+    runScript("active stroke.jsx", "  ☐ ", 0.4)
+    currentcolorfocus = false
     hs.alert.defaultStyle.textSize =  27
   else
     hs.alert.defaultStyle.textSize =  80
-    hs.alert.show(" ◼︎", 0.4)
-    hs.osascript.applescript("tell application \"" .. illuinstall .. "\"\n do script \"FocusOnFill\" from \"Helpers\" without dialogs\nend tell")
-    hs.execute("defaults write com.illhelpers.togsf colorfocus fill", true)
+    runScript("active fill.jsx", "  ◼︎ ", 0.4)
+    currentcolorfocus = true
     hs.alert.defaultStyle.textSize =  27
   end
 end
 
 hotkeys = hs.hotkey.modal.new()
 
--- hotkeys:bind("shift", "z",           function() togglecolorfocus() end)
+hotkeys:bind("shift", "z",           function() togglecolorfocus() end)
 
 -- Flip horizontal and Vertical, like a human
 hotkeys:bind({"cmd", "shift"}, "h",         function() runScript("FlipH.jsx", "Flip Horizontal", notifyduration) end)
@@ -115,16 +99,29 @@ hotkeys:bind({"cmd", "shift", "alt", "ctrl"}, "]", function() runScript("Select 
 -- Misc :)
 hotkeys:bind({"cmd", "alt", "ctrl"}, "s",   function() runScript("Swap Object Colors.jsx", "Swap Object Colors", notifyduration) end)
 hotkeys:bind("cmd", "h",                    function() runScript("ToggleCruft.jsx", "Toggle Edges and Bounding Box", notifyduration) end)
-hotkeys:bind({"cmd", "alt"}, "t",           function() resettransform() end)
-hotkeys:bind({"cmd", "alt", "ctrl", "shift"}, "s", function() togglescalestrokes() end)
+-- hotkeys:bind({"cmd", "alt"}, "t",           function() resettransform() end)
+hotkeys:bind({"cmd", "alt", "ctrl", "shift"}, "s", function() runScript("ToggleStrokeNFX.jsx", "", 0) end)
 hotkeys:bind({"ctrl", "alt", "cmd"}, "h", function() runScript("Hard Export.jsx", "Hard Export", notifyduration) end)
 hotkeys:bind({"ctrl", "alt", "cmd"}, "w", function() runScript("Hard Close.jsx", "Hard Close", 1.5) end)
 hotkeys:bind("alt", "o",                    function() runScript("Opacity Set.jsx", "", notifyduration) end)
 hotkeys:bind({"cmd", "shift", "alt", "ctrl"}, "i", function() runScript("ImportPNGtoArtboardGrid.jsx", "Import Files to Grid", 0) end)
 hotkeys:bind("ctrl", "z",                   function() runScript("Zoom And Center Selection Animated.jsx", "", notifyduration) end)
+hotkeys:bind("cmd", "forwarddelete",                   function() runScript("Smart Corner Delete Anchors.jsx", "", 0) end)
+hotkeys:bind({"cmd", "shift"}, "forwarddelete",                   function() runScript("Smart Heal.jsx", "", 0) end)
+hotkeys:bind({"cmd", "shift"}, "j",                   function() runScript("Join Paths.jsx", "", 0) end)
+-- hotkeys:bind({"cmd", "alt"}, "s",                   function() runScript("Points Test.jsx", "", 0) end)
+hotkeys:bind({"cmd", "shift"}, "u",                   function() runScript("Unclip.jsx", "", 0) end)
+hotkeys:bind({"ctrl", "alt", "cmd"}, "t", function() runScript("TrimMasks.jsx", "Trim Masks", notifyduration) end)
+hotkeys:bind({"cmd", "alt", "ctrl", "shift"}, "r",   function() runScript("Rotate Bounding Box.jsx", "Rotate Bounding Box", 0.5) end)
+hotkeys:bind({"ctrl", "alt", "cmd"}, "e",                  function() runScript("Export Now.jsx", "Exporting Current Artboard", notifyduration) end)
+hotkeys:bind({"cmd", "shift"}, ".",                  function() runScript("Hue Up.jsx", "", 0) end)
+hotkeys:bind({"cmd", "shift"}, ",",                  function() runScript("Hue Down.jsx", "", 0) end)
+hotkeys:bind({"cmd", "alt"}, ",",                  function() runScript("", "Point Snap Toggle", notifyduration) end)
+hotkeys:bind({"ctrl", "shift"}, "v",                  function() sendshiftj() end)
+
 -- Define a callback function to be called when application events happen
 function applicationWatcherCallback(appName, eventType, appObject)
-  if (appName == "Adobe Illustrator 2020") then
+  if (appName == illuinstall) then
     if (eventType == hs.application.watcher.activated) then
       hotkeys:enter()
     elseif (eventType == hs.application.watcher.deactivated) then
@@ -139,3 +136,10 @@ watcher:start()
 
 -- Activate the modal state
 hotkeys:exit()
+
+hs.urlevent.bind("AlertOn", function(eventName, params)
+  hs.alert.show("SS&E ON")
+end)
+hs.urlevent.bind("AlertOff", function(eventName, params)
+  hs.alert.show("SS&E OFF")
+end)
