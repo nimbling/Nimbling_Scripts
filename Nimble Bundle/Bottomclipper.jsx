@@ -9,98 +9,111 @@
 //  Big thanks to CarlosCanto and MuppetMark on the Adobe Illustrator Scripting Forums
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-function CopyAppearance(clipobject, appearance) {
-    if (clipobject.filled) {
-        appearance.fillColor = clipobject.fillColor;
+function CopyAppearance(clipObj, appearance) {
+    if (clipObj.filled) {
+        appearance.fillColor = clipObj.fillColor;
     }
-    if (clipobject.stroked) {
-        appearance.stroked = clipobject.stroked;
-        appearance.strokeWidth = clipobject.strokeWidth;
-        appearance.strokeColor = clipobject.strokeColor;
+    if (clipObj.stroked) {
+        appearance.stroked = clipObj.stroked;
+        appearance.strokeWidth = clipObj.strokeWidth;
+        appearance.strokeColor = clipObj.strokeColor;
     }
 }
 
-function PasteAppearance(clipobject, appearance) {
+function PasteAppearance(clipObj, appearance) {
     if (appearance.fillColor) {
-        clipobject.fillColor = appearance.fillColor;
+        clipObj.fillColor = appearance.fillColor;
     }
     if (appearance.stroked) {
-        clipobject.stroked = appearance.stroked;
-        clipobject.strokeWidth = appearance.strokeWidth;
-        clipobject.strokeColor = appearance.strokeColor;
+        clipObj.stroked = appearance.stroked;
+        clipObj.strokeWidth = appearance.strokeWidth;
+        clipObj.strokeColor = appearance.strokeColor;
     }
 }
 
-function Main(curDoc, sel, amountofselectedobjects, clipobject, appearance) {
-    if (!amountofselectedobjects) return;
+function Main(doc, sel, selLength, clipObj, isMakeCP) {
+  if (!selLength) return;
 
-	if (curDoc.activeLayer.locked || !curDoc.activeLayer.visible) {
+  var appearance = [];
+
+	if (doc.activeLayer.locked || !doc.activeLayer.visible) {
 		alert("Please select objects on an unlocked and visible layer,\nthen run this script again.");
 		return;
 	}
 
     //IF Bottom object is already a clipping mask, Add top objects on top.
-    if (clipobject.typename === "GroupItem" && clipobject.clipped) {
-        for (i = amountofselectedobjects - 2; i >= 0; i--) {
-            sel[i].move(clipobject, ElementPlacement.PLACEATBEGINNING);
+    if (clipObj.typename === "GroupItem" && clipObj.clipped) {
+        for (i = selLength - 2; i >= 0; i--) {
+            sel[i].move(clipObj, ElementPlacement.PLACEATBEGINNING);
         }
         return; //AND EXIT
     }
 
     // Get the right mask if the top object was a raster, mesh, or other type
     var oldPos = 0;
-    for (j = amountofselectedobjects - 1; j >= 0; j--) {
+    for (j = selLength - 1; j >= 0; j--) {
         if (sel[j].typename === "PathItem" || 
             sel[j].typename === "CompoundPathItem" ||
             sel[j].typename === "TextFrame") {
-            clipobject = sel[j];
-            if (j <= amountofselectedobjects - 1) { 
+            clipObj = sel[j];
+            if (j <= selLength - 1) { 
                 oldPos = j;
-                clipobject.move(sel[0], ElementPlacement.PLACEBEFORE);
+                clipObj.move(sel[0], ElementPlacement.PLACEBEFORE);
             }
             break;
         }
     }
 
     //IF Compound object, alter appearance SOURCE
-    if (clipobject.typename === "CompoundPathItem") {
-        clipobject = clipobject.pathItems[0];
+    if (clipObj.typename === "CompoundPathItem") {
+        clipObj = clipObj.pathItems[0];
     }
 
-    CopyAppearance(clipobject, appearance);
+    CopyAppearance(clipObj, appearance);
 
     //THEN CLIP
-    app.executeMenuCommand('makeMask');
+    app.executeMenuCommand("makeMask");
 
     //IF Compound object, alter appearance TARGET
-    if (clipobject.typename === "CompoundPathItem") {
-        clipobject = clipobject.pageItems[0].pathItems[0];
+    if (clipObj.typename === "CompoundPathItem") {
+        clipObj = clipObj.pageItems[0].pathItems[0];
     }
 
-    PasteAppearance(clipobject, appearance);
+    PasteAppearance(clipObj, appearance);
 
-    // Return clipobject position in selection
-    clipobject.move(selection[0].pageItems[oldPos], ElementPlacement.PLACEAFTER);
+    // Return clipObj position in selection
+    var parent = (clipObj.parent.typename === "CompoundPathItem") ? clipObj.parent : clipObj;
+    parent.move(selection[0].pageItems[oldPos], ElementPlacement.PLACEAFTER);
+    
+    if (isMakeCP && parent.typename === "PathItem") {
+      var curSel = selection;
+      selection = [parent];
+      app.executeMenuCommand("compoundPath");
+      selection = curSel;
+    }
 
     // Notify about problems restoring the appearance of the current version of the Illustrator
-    if (appearance.filled && !clipobject.filled) {
+    if (appearance.filled && !clipObj.filled) {
         alert("Sorry. Clipping mask's FILL was not restored due to problems in the Adobe Illustrator version");
     }
-    if (appearance.stroked && !clipobject.stroked) {
+    if (appearance.stroked && !clipObj.stroked) {
         alert("Sorry. Clipping mask's STROKE was not restored due to problems in the Adobe Illustrator version");
     }
 }
 
 //INIT, Is there a document open?
 if (app.documents.length > 0) {
-    var curDoc = app.activeDocument;
+    var doc = app.activeDocument;
 } else {
     Window.alert("You must open at least one document.");
 }
 
-var sel = curDoc.selection; // get selection
-var amountofselectedobjects = sel.length;
-var clipobject = sel[amountofselectedobjects - 1]; // BOTTOM OBJECT
-var clipcolors = [];
+var sel = doc.selection; // get selection
+var selLength = sel.length;
+var clipObj = sel[selLength - 1]; // BOTTOM OBJECT
+// Illustrator does not allow to select a clip group by clicking the fill of the clipping path or allow to drag it by this fill.
+// However, for some another broken reason, it is allowed if a clipping path is a compound path.
+// When enabled, this flag auto-converts every clipping path into a compound one.
+var isMakeCP = true;
 
-Main(curDoc, sel, amountofselectedobjects, clipobject, clipcolors);
+Main(doc, sel, selLength, clipObj, isMakeCP);
