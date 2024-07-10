@@ -250,7 +250,13 @@ Flip Horizontal and Vertical.
 
 1.  Launch using your launcher of choice (Better touch tool, Alfred,
     Quicksilver, Launchbar, etc.) to tile up to 12 of your finder windows.
-    
+
+## Json Extractor
+Development tool:
+Combines all same name keys and groups their values.
+Show the combined keys in a list, and when clicking on these: show the values in a plain text list for copy-pasting into other design tools like figma or a google sheet.
+
+![](<images/JsonExtractor.png>)
 
 ## Run an Illustrator script using Alfred, on a single shortcut, with auto complete
 
