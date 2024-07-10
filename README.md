@@ -256,7 +256,7 @@ Development tool:
 Combines all same name keys and groups their values.
 Show the combined keys in a list, and when clicking on these: show the values in a plain text list for copy-pasting into other design tools like figma or a google sheet.
 
-![](<images/JsonExtractor.png>)
+![](<JsonExtractor.png>)
 
 ## Run an Illustrator script using Alfred, on a single shortcut, with auto complete
 
