@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JSON Key Viewer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            background-color: #ffc7e4;
+        }
+        #container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 32px;
+        }
+        #dropZone {
+            border: 4px dashed #ba6792;
+            padding: 24px;
+            text-align: center;
+            margin: 20px 0;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+        #keyList {
+            margin: 20px 0;
+            max-height: 20%;
+            overflow-y: auto;
+        }
+        #keyList button {
+            margin: 5px;
+            border: 1px solid #694959;
+            border-radius: 4px;
+        }
+        #valuesBox {
+            flex: 1;
+            width: 100%;
+            resize: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        
+        <h2><div id="dropZone">Feed me a JSON File</div></H2>
+        <h3>Keys:</h3>
+        <div id="keyList"></div>
+        <h3>Values:</h3>
+        <textarea id="valuesBox" readonly></textarea>
+    </div>
+
+    <script>
+        const dropZone = document.getElementById('dropZone');
+
+        dropZone.addEventListener('dragover', (event) => {
+            event.preventDefault();
+            dropZone.style.borderColor = '#0b94ca';
+            dropZone.innerHTML = 'Drop it!';
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.style.borderColor = '#ba6792';
+            dropZone.innerHTML = 'Feed me a JSON File';
+        });
+
+        dropZone.addEventListener('drop', (event) => {
+            event.preventDefault();
+            const file = event.dataTransfer.files[0];
+            if (file && file.type === "application/json") {
+                processFile(file);
+            } else {
+                alert('Not a JSON file.');
+                dropZone.innerHTML = 'Feed me a *VALID* JSON File';
+            }
+        });
+
+        function processFile(file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const content = e.target.result;
+                try {
+                    const jsonData = JSON.parse(content);
+                    const allKeys = new Set();
+                    const valuesMap = {};
+
+                    function extractKeysAndValues(obj) {
+                        for (const key in obj) {
+                            if (obj.hasOwnProperty(key)) {
+                                const value = obj[key];
+                                if (typeof value === 'string' || typeof value === 'number') {
+                                    allKeys.add(key);
+                                    if (!valuesMap[key]) {
+                                        valuesMap[key] = [];
+                                    }
+                                    valuesMap[key].push(value);
+                                } else if (typeof value === 'object' && value !== null) {
+                                    extractKeysAndValues(value);
+                                }
+                            }
+                        }
+                    }
+
+                    extractKeysAndValues(jsonData);
+
+                    const keyListDiv = document.getElementById('keyList');
+                    keyListDiv.innerHTML = '';
+                    allKeys.forEach(key => {
+                        const keyButton = document.createElement('button');
+                        keyButton.textContent = `${key} (${valuesMap[key].length})`;
+                        keyButton.addEventListener('click', () => {
+                            document.getElementById('valuesBox').value = valuesMap[key].join('\n');
+                        });
+                        keyListDiv.appendChild(keyButton);
+                    });
+                    dropZone.innerHTML = 'Thanks!';
+                    dropZone.style.borderColor = '#07ee92';
+                    setTimeout(() => {
+                        dropZone.innerHTML = `Showing contents of \"${file.name}\"`;
+                        dropZone.style.borderColor = '#ba6792';
+                    }, 500);
+                } catch (error) {
+                    alert('Invalid JSON file.');
+                    dropZone.innerHTML = 'Feed me a *VALID* JSON File';
+                    dropZone.style.borderColor = '#bc0000';
+                }
+            };
+            reader.readAsText(file);
+        }
+    </script>
+
+
+</body>
+</html>
