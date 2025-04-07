@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Replacer</title>
+  <style>
+    /* Style additions */
+    #variables-view .variable-item.keyboard-highlight {
+      background-color: #dbeafe;
+      border-color: #93c5fd;
+      outline: 1px solid #93c5fd;
+    }
+
+    #variables-view #target-variable-input:focus {
+      border-color: #1890ff;
+      outline: 1px solid #1890ff;
+      box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+    }
+
+    /* Basic Reset & Body */
+    body {
+      font-family: Inter, sans-serif;
+      margin: 0;
+      padding: 16px;
+      background-color: #f8f8f8;
+      color: #333;
+      font-size: 14px;
+      line-height: 1.5;
+      min-height: 100px;
+    }
+
+    h2,
+    h3 {
+      color: #1f1f1f;
+      margin: 0 0 8px 0;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 16px;
+      font-size: 34px;
+    }
+
+    p {
+      color: #555;
+      margin: 0 0 12px 0;
+    }
+
+    .toggle-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      background-color: #e0e0e0;
+      border-radius: 16px;
+      padding: 2px;
+    }
+
+    .toggle-button {
+      padding: 6px 12px;
+      border-radius: 14px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background-color 0.2s ease, color 0.2s ease;
+      flex: 1;
+      text-align: center;
+      color: #555;
+      background-color: transparent;
+    }
+
+    .toggle-button.active {
+      background-color: #ffffff;
+      color: #1f1f1f;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    #error,
+    #success-message {
+      padding: 8px 12px;
+      margin-bottom: 12px;
+      border-radius: 4px;
+      font-weight: 500;
+      display: none;
+    }
+
+    #error {
+      color: #c72a2a;
+      background-color: #fceaea;
+      border: 1px solid #f5c5c5;
+    }
+
+    #success-message {
+      color: #0f5132;
+      background-color: #d1e7dd;
+      border: 1px solid #badbcc;
+    }
+
+    .empty-state,
+    .no-results {
+      text-align: center;
+      color: #888;
+      padding: 15px;
+      font-style: italic;
+    }
+
+    .list-container {
+      overflow-y: auto;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      background-color: #fff;
+      margin-bottom: 16px;
+    }
+
+    #groups-results-list {
+      min-height: 100px;
+      max-height: 150px;
+    }
+
+    #groups-grid-container {
+      min-height: 200px;
+      max-height: 350px;
+    }
+
+    #source-variables-list {
+      min-height: 150px;
+      max-height: 300px;
+    }
+
+    #variables-view .variables-list-target {
+      min-height: 200px;
+      max-height: 350px;
+    }
+
+    .list-container::-webkit-scrollbar,
+    #groups-grid-container::-webkit-scrollbar,
+    #variables-view .variables-list-target::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .list-container::-webkit-scrollbar-track,
+    #groups-grid-container::-webkit-scrollbar-track,
+    #variables-view .variables-list-target::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 4px;
+    }
+
+    .list-container::-webkit-scrollbar-thumb,
+    #groups-grid-container::-webkit-scrollbar-thumb,
+    #variables-view .variables-list-target::-webkit-scrollbar-thumb {
+      background: #c1c1c1;
+      border-radius: 4px;
+    }
+
+    .list-container::-webkit-scrollbar-thumb:hover,
+    #groups-grid-container::-webkit-scrollbar-thumb:hover,
+    #variables-view .variables-list-target::-webkit-scrollbar-thumb:hover {
+      background: #a8a8a8;
+    }
+
+    #groups-view .group-item {
+      padding: 6px 10px;
+      margin: 0;
+      background: #fff;
+      color: #333;
+      border-bottom: 1px solid #eee;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    #groups-view .group-item:last-child {
+      border-bottom: none;
+    }
+
+    #groups-view #group-selector-container {
+      margin-top: 16px;
+      border-top: 1px solid #e0e0e0;
+      padding-top: 16px;
+      display: none;
+    }
+
+    #groups-view #groups-grid-container {
+      overflow-y: auto;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      background-color: #fff;
+      padding: 5px;
+    }
+
+    #groups-view .groups-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 5px;
+    }
+
+    #groups-view .group-button {
+      text-align: left;
+      padding: 6px 10px;
+      background: #f9f9f9;
+      border: 1px solid #eee;
+      border-radius: 4px;
+      cursor: pointer;
+      color: #333;
+      transition: background 0.2s ease, border-color 0.2s ease;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    #groups-view .group-button:hover {
+      background: #f0f0f0;
+      border-color: #ddd;
+    }
+
+    #groups-view .group-button.selected {
+      background: #e6f7ff;
+      border-color: #1890ff;
+      color: #1f1f1f;
+      font-weight: 500;
+    }
+
+    #variables-view .variables-list-target {
+      overflow-y: auto;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      background-color: #fff;
+    }
+
+    #variables-view .variable-item {
+      padding: 6px 10px;
+      margin: 0;
+      background: #fff;
+      color: #333;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      border-bottom: 1px solid #eee;
+      transition: background-color 0.15s ease;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    #variables-view .variable-item:last-child {
+      border-bottom: none;
+    }
+
+    #variables-view .variable-item:hover {
+      background-color: #f0f0f0;
+    }
+
+    #variables-view .variable-item.selected {
+      background-color: #e6f7ff;
+      border-left: 3px solid #1890ff;
+      padding-left: 7px;
+      font-weight: 500;
+    }
+
+    #variables-view .variable-item .variable-name {
+      margin-left: 8px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    #variables-view .variable-item .color-preview {
+      width: 16px;
+      height: 16px;
+      border-radius: 3px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      flex-shrink: 0;
+      background-color: #cccccc;
+    }
+
+    #variables-view .variable-item .item-type-label {
+      font-size: 10px;
+      color: #888;
+      margin-left: auto;
+      padding-left: 10px;
+      flex-shrink: 0;
+    }
+
+    #variables-view #variable-selector-container {
+      margin-top: 16px;
+      border-top: 1px solid #e0e0e0;
+      padding-top: 16px;
+      display: none;
+    }
+
+    #variables-view #target-variable-input {
+      width: calc(100% - 22px);
+      padding: 8px 10px;
+      margin-bottom: 8px;
+      background: #fff;
+      border: 1px solid #d9d9d9;
+      border-radius: 4px;
+      color: #333;
+      font-size: 12px;
+      transition: border-color 0.2s ease;
+    }
+
+    #variables-view #target-variable-input::placeholder {
+      color: #aaa;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>Replacer</h2>
+  <div class="toggle-container">
+    <div
+      id="toggle-groups"
+      class="toggle-button"
+      data-mode="groups"
+    >Groups</div>
+    <div
+      id="toggle-variables"
+      class="toggle-button"
+      data-mode="variables"
+    >Variables</div>
+  </div>
+  <div id="error"></div>
+  <div id="success-message"></div>
+
+  <div
+    id="groups-view"
+    style="display: none;"
+  >
+    <p>Scan selection to find variable groups (e.g., "Color/Brand/Primary"), then switch to another group (e.g.,
+      "Color/Brand/Secondary") matching by base name.</p>
+    <div id="groups-results-container">
+      <h3>Groups Found in Selection:</h3>
+      <div
+        id="groups-results-list"
+        class="list-container"
+      >Select elements to begin</div>
+      <div
+        id="group-selector-container"
+        style="display: none;"
+      >
+        <h3>Switch to Group:</h3>
+        <div id="groups-grid-container">
+          <div
+            id="groups-grid"
+            class="groups-grid"
+          ></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    id="variables-view"
+    style="display: none;"
+  >
+    <p>Select objects to find specific color variables or hex colors, then replace the selected color with a chosen
+      variable.</p>
+    <div
+      id="variables-initial-state"
+      style="display: block;"
+    >
+      <div class="list-container">
+        <div class="empty-state">Select elements to begin</div>
+      </div>
+    </div>
+    <div
+      id="variables-results-container"
+      style="display: none;"
+    >
+      <h3>Colors Found (Select ONE to replace):</h3>
+      <div
+        id="source-variables-list"
+        class="list-container"
+      ></div>
+      <div
+        id="variable-selector-container"
+        style="display: none;"
+      >
+        <h3>Replace with Color Variable:</h3> <input
+          type="text"
+          id="target-variable-input"
+          placeholder="Search available variables..."
+        />
+        <div
+          id="target-variables-list"
+          class="variables-list-target"
+        ></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- DOM Elements ---
+    const errorDiv = document.getElementById('error'); const successDiv = document.getElementById('success-message'); const toggleGroupsBtn = document.getElementById('toggle-groups'); const toggleVariablesBtn = document.getElementById('toggle-variables'); const groupsView = document.getElementById('groups-view'); const variablesView = document.getElementById('variables-view'); const groupsResultsList = document.getElementById('groups-results-list'); const groupsGridContainer = document.getElementById('groups-grid-container'); const groupsGrid = document.getElementById('groups-grid'); const groupSelectorContainer = document.getElementById('group-selector-container'); const variablesInitialStateDiv = document.getElementById('variables-initial-state'); const variablesResultsContainerDiv = document.getElementById('variables-results-container'); const sourceListDiv = document.getElementById('source-variables-list'); const variableSelectorContainer = document.getElementById('variable-selector-container'); const targetSearchInput = document.getElementById('target-variable-input'); const targetListDiv = document.getElementById('target-variables-list');
+
+    // --- State ---
+    let currentMode = null; const storageKey = 'replacer-mode'; let hasFigmaSelection = false; let initialScanDone = false; let variables_selectedSourceValue = null; let variables_allTargetColorVariables = []; let variables_highlightedIndex = -1; let groups_selectedTargetPathPrefix = null;
+
+    // --- Utility Functions ---
+    function showMessage(el, msg) { el.textContent = msg; el.style.display = 'block'; updatePluginHeight(); } function hideMessage(el) { el.textContent = ''; el.style.display = 'none'; } function clearMessages() { hideMessage(errorDiv); hideMessage(successDiv); } function updatePluginHeight() { setTimeout(() => { const height = document.body.scrollHeight; parent.postMessage({ pluginMessage: { type: 'resize', height: height + 15 } }, '*'); }, 50); }
+    function utils_rgbaToCssString(rgba) { if (!rgba || typeof rgba.r !== 'number' || typeof rgba.g !== 'number' || typeof rgba.b !== 'number') { return '#cccccc'; } const r = Math.round(rgba.r * 255); const g = Math.round(rgba.g * 255); const b = Math.round(rgba.b * 255); const a = (typeof rgba.a === 'number') ? rgba.a : 1; return `rgba(${r}, ${g}, ${b}, ${a})`; }
+
+    // --- Mode Switching & UI Updates ---
+    async function setMode(mode, isInitialLoad = false) { const previousMode = currentMode; currentMode = mode; toggleGroupsBtn.classList.toggle('active', mode === 'groups'); toggleVariablesBtn.classList.toggle('active', mode === 'variables'); groupsView.style.display = mode === 'groups' ? 'block' : 'none'; variablesView.style.display = mode === 'variables' ? 'block' : 'none'; clearMessages(); resetUIState(mode); if (!isInitialLoad) { await parent.postMessage({ pluginMessage: { type: 'set-storage', key: storageKey, value: mode } }, '*'); if (hasFigmaSelection) { triggerScan(); } } updatePluginHeight(); }
+    function resetUIState(mode) { if (mode === 'groups') { groupsResultsList.innerHTML = hasFigmaSelection ? 'Scanning...' : 'Select elements to begin'; groupsGrid.innerHTML = ''; groupSelectorContainer.style.display = 'none'; groups_selectedTargetPathPrefix = null; } else if (mode === 'variables') { variablesInitialStateDiv.style.display = !hasFigmaSelection ? 'block' : 'none'; variablesResultsContainerDiv.style.display = hasFigmaSelection ? 'block' : 'none'; sourceListDiv.innerHTML = hasFigmaSelection ? 'Scanning...' : '<div class="empty-state">Select elements to begin</div>'; variableSelectorContainer.style.display = 'none'; variables_selectedSourceValue = null; variables_highlightedIndex = -1; } else { groupsResultsList.innerHTML = 'Select elements to begin'; groupsGrid.innerHTML = ''; groupSelectorContainer.style.display = 'none'; variablesInitialStateDiv.style.display = 'block'; variablesResultsContainerDiv.style.display = 'none'; sourceListDiv.innerHTML = '<div class="empty-state">Select elements to begin</div>'; variableSelectorContainer.style.display = 'none'; variables_highlightedIndex = -1; } updatePluginHeight(); }
+
+    // --- Scanning ---
+    function triggerScan() { if (!currentMode) { return; } clearMessages(); if (currentMode === 'groups') { groupsResultsList.innerHTML = 'Scanning...'; groupSelectorContainer.style.display = 'none'; } else { variablesInitialStateDiv.style.display = 'none'; variablesResultsContainerDiv.style.display = 'block'; sourceListDiv.innerHTML = '<div class="empty-state">Scanning...</div>'; variableSelectorContainer.style.display = 'none'; } updatePluginHeight(); parent.postMessage({ pluginMessage: { type: 'scan-selection', mode: currentMode } }, '*'); }
+
+    // --- Groups Mode UI Handlers ---
+    function groups_renderResults(groupsInSelection, allGroups) { let listHtml = ''; if (groupsInSelection.length === 0) { listHtml = '<div class="empty-state">No variable groups found in selection.</div>'; } else { groupsInSelection.forEach(group => { listHtml += `<div class="group-item">${group}</div>`; }); } groupsResultsList.innerHTML = listHtml; groupsGrid.innerHTML = ''; groups_selectedTargetPathPrefix = null; if (allGroups.length > 0 && groupsInSelection.length > 0) { allGroups.forEach(group => { const button = document.createElement('div'); button.className = 'group-button'; button.textContent = group; button.dataset.group = group; button.onclick = () => groups_handleGroupButtonClick(group); groupsGrid.appendChild(button); }); groupSelectorContainer.style.display = 'block'; } else { groupSelectorContainer.style.display = 'none'; } updatePluginHeight(); }
+    function groups_handleGroupButtonClick(targetGroupPathPrefix) { groups_selectedTargetPathPrefix = targetGroupPathPrefix; const buttons = groupsGrid.querySelectorAll('.group-button'); buttons.forEach(button => { button.classList.toggle('selected', button.dataset.group === targetGroupPathPrefix); }); parent.postMessage({ pluginMessage: { type: 'apply-group', targetGroup: targetGroupPathPrefix } }, '*'); }
+
+    // --- Variables Mode UI Handlers ---
+    function variables_createSourceListItem(itemData, clickHandler) { const item = document.createElement('div'); item.className = 'variable-item'; item.dataset.value = itemData.type === 'variable' ? itemData.id : itemData.hex; item.title = itemData.type === 'variable' ? itemData.name : itemData.hex; const colorPreview = document.createElement('div'); colorPreview.className = 'color-preview'; if (itemData.type === 'variable' && itemData.color) { colorPreview.style.backgroundColor = utils_rgbaToCssString(itemData.color); } else if (itemData.type === 'hex') { colorPreview.style.backgroundColor = itemData.hex; } else { colorPreview.style.backgroundColor = '#cccccc'; } item.appendChild(colorPreview); const nameSpan = document.createElement('span'); nameSpan.className = 'variable-name'; nameSpan.textContent = itemData.type === 'variable' ? itemData.name : itemData.hex; item.appendChild(nameSpan); if (itemData.type === 'hex') { const typeLabel = document.createElement('span'); typeLabel.className = 'item-type-label'; typeLabel.textContent = '(Hex)'; item.appendChild(typeLabel); } item.onclick = clickHandler; return item; }
+    function variables_createVariableListItem(variable, clickHandler) { const item = document.createElement('div'); item.className = 'variable-item'; item.dataset.variableId = variable.id; item.title = variable.name; const colorPreview = document.createElement('div'); colorPreview.className = 'color-preview'; colorPreview.style.backgroundColor = variable.color ? utils_rgbaToCssString(variable.color) : '#cccccc'; item.appendChild(colorPreview); const nameSpan = document.createElement('span'); nameSpan.className = 'variable-name'; nameSpan.textContent = variable.name; item.appendChild(nameSpan); item.onclick = clickHandler; return item; }
+    function variables_renderSourceList(foundItems = []) { sourceListDiv.innerHTML = ''; variables_selectedSourceValue = null; variableSelectorContainer.style.display = 'none'; variablesInitialStateDiv.style.display = 'none'; variablesResultsContainerDiv.style.display = 'block'; if (foundItems.length === 0) { sourceListDiv.innerHTML = '<div class="empty-state">No color variables or hex colors found.</div>'; } else { foundItems.forEach(itemData => { const item = variables_createSourceListItem(itemData, () => variables_handleSourceValueClick(item.dataset.value)); sourceListDiv.appendChild(item); }); } updatePluginHeight(); }
+    function variables_renderTargetList() { const filterText = targetSearchInput.value.toLowerCase(); targetListDiv.innerHTML = ''; const filteredTargets = variables_allTargetColorVariables.filter(variable => (!filterText || variable.name.toLowerCase().includes(filterText)) && (typeof variables_selectedSourceValue === 'string' && variables_selectedSourceValue.startsWith('#') || variable.id !== variables_selectedSourceValue)); if (filteredTargets.length === 0) { targetListDiv.innerHTML = '<div class="no-results">No matching variables found.</div>'; } else { filteredTargets.forEach(variable => { const item = variables_createVariableListItem(variable, () => variables_handleTargetVariableClick(variable.id)); targetListDiv.appendChild(item); }); } variables_updateHighlight(-1); updatePluginHeight(); }
+    function variables_handleSourceValueClick(value) { clearMessages(); variables_selectedSourceValue = value; const items = sourceListDiv.querySelectorAll('.variable-item'); items.forEach(item => { item.classList.toggle('selected', item.dataset.value === value); }); variableSelectorContainer.style.display = 'block'; targetSearchInput.value = ''; variables_renderTargetList(); targetSearchInput.focus(); updatePluginHeight(); }
+    function variables_handleTargetVariableClick(targetVariableId) { if (!variables_selectedSourceValue) { showMessage(errorDiv, 'Please select a source color/variable first.'); return; } clearMessages(); parent.postMessage({ pluginMessage: { type: 'replace-value', sourceValue: variables_selectedSourceValue, targetVariableId: targetVariableId } }, '*'); }
+
+    // --- Keyboard Navigation Logic ---
+    function variables_updateHighlight(newIndex) { const items = targetListDiv.querySelectorAll('.variable-item'); const previousItem = targetListDiv.querySelector('.variable-item.keyboard-highlight'); if (previousItem) { previousItem.classList.remove('keyboard-highlight'); } variables_highlightedIndex = newIndex; if (newIndex >= 0 && newIndex < items.length) { const newItem = items[newIndex]; newItem.classList.add('keyboard-highlight'); newItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); } else { variables_highlightedIndex = -1; } }
+    function variables_handleTargetKeyDown(event) { const items = targetListDiv.querySelectorAll('.variable-item'); const numItems = items.length; let newIndex = variables_highlightedIndex; if (numItems === 0 && event.key !== 'Escape') return; switch (event.key) { case 'ArrowDown': case 'Tab': event.preventDefault(); newIndex++; if (newIndex >= numItems) { newIndex = 0; } variables_updateHighlight(newIndex); break; case 'ArrowUp': event.preventDefault(); newIndex--; if (newIndex < 0) { newIndex = numItems - 1; } variables_updateHighlight(newIndex); break; case 'Enter': event.preventDefault(); if (variables_highlightedIndex >= 0 && variables_highlightedIndex < numItems) { items[variables_highlightedIndex].click(); } break; case 'Escape': targetSearchInput.blur(); variables_updateHighlight(-1); break; } }
+
+    // --- Initialization & Message Handling ---
+    window.onload = () => { toggleGroupsBtn.onclick = () => setMode('groups'); toggleVariablesBtn.onclick = () => setMode('variables'); targetSearchInput.addEventListener('input', variables_renderTargetList); targetSearchInput.addEventListener('keydown', variables_handleTargetKeyDown); document.addEventListener('keydown', (event) => { if (event.key === 'Escape') parent.postMessage({ pluginMessage: { type: 'close' } }, '*'); }); parent.postMessage({ pluginMessage: { type: 'get-storage', key: storageKey } }, '*'); updatePluginHeight(); };
+    window.onmessage = (event) => {
+      const message = event.data.pluginMessage; if (!message) return; clearMessages();
+      switch (message.type) {
+        case 'get-storage-result': if (message.key === storageKey) { const savedMode = message.value; if (savedMode === 'groups' || savedMode === 'variables') { currentMode = savedMode; setMode(savedMode, true); parent.postMessage({ pluginMessage: { type: 'check-selection-state-initial' } }, '*'); } else { resetUIState(null); parent.postMessage({ pluginMessage: { type: 'check-selection-state-initial' } }, '*'); } } break;
+        case 'initial-selection-state-info': hasFigmaSelection = message.hasSelection; if (currentMode && hasFigmaSelection && !initialScanDone) { initialScanDone = true; triggerScan(); } else if (!currentMode) { resetUIState(null); } break;
+        case 'selection-changed': const selectionChanged = hasFigmaSelection !== message.hasSelection; hasFigmaSelection = message.hasSelection; if (selectionChanged) { if (hasFigmaSelection) { if (currentMode) { triggerScan(); } } else { resetUIState(currentMode); } } break;
+        case 'scan-results-groups': if (currentMode !== 'groups') break; if (message.reset) { hasFigmaSelection = false; resetUIState('groups'); } else { hasFigmaSelection = true; groups_renderResults(message.groupsInSelection || [], message.allGroups || []); } break;
+        case 'scan-results-variables': if (currentMode !== 'variables') break; if (message.reset) { hasFigmaSelection = false; resetUIState('variables'); } else { hasFigmaSelection = true; variables_allTargetColorVariables = message.allColorVariables || []; variables_renderSourceList(message.variablesFound || []); } break; // Removed logging
+        case 'replacement-complete-groups': if (currentMode !== 'groups') break; showMessage(successDiv, `Successfully switched ${message.count} variables to ${message.targetGroup}.`); break;
+        case 'replacement-complete-variables': if (currentMode !== 'variables') break; showMessage(successDiv, `Successfully replaced ${message.count} instance(s).`); targetSearchInput.value = ''; variables_renderTargetList(); break;
+        case 'error': showMessage(errorDiv, message.message || 'An unknown error occurred.'); if (currentMode === 'groups') { groupsResultsList.innerHTML = 'Error occurred.'; groupSelectorContainer.style.display = 'none'; } if (currentMode === 'variables') { sourceListDiv.innerHTML = 'Error occurred.'; variableSelectorContainer.style.display = 'none'; } updatePluginHeight(); break;
+      }
+    };
+  </script>
+</body>
+
+</html>
