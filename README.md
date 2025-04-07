@@ -214,8 +214,9 @@ Flip Horizontal and Vertical.
 3.  In the dialog you're presented with, press the "new SVG filter" icon (looks like new document)
 4.  Paste "ImageBevel10Redshift.txt" or "ImageBevel20Redshift.txt" over everything there.
 
-![](<images/fruitbevels.png>)
-
+<br>
+<img src="https://github.com/nimbling/Nimbling_Scripts/raw/master/images/fruitbevels.png" width="600">
+<br>
 ~   Slices of fruit made using these SVG filters
 
 ## Axonometry actions
@@ -256,8 +257,25 @@ Development tool:
 Combines all same name keys and groups their values.
 Show the combined keys in a list, and when clicking on these: show the values in a plain text list for copy-pasting into other design tools like figma or a google sheet.
 
-![](<JsonExtractor.png>)
+<img src="https://github.com/nimbling/Nimbling_Scripts/raw/master/images/JsonExtractor.png" width="600">
+## Replacer for figma
+A simple figma panel that replaces colors based on their "group" or per link to a specific color variable.
+
+- You select the object / component in figma and run this plugin.
+  - For color groups: It automatically scans for "groups" and will do it's best to replace it with color variables that share the same naming structure.
+  - For color variables, or plain colors: You select the color / variable to be replaced (target) and select the color to replace it with (source).
+- Done.
+
+☑ Panel will remember what function you used last time.<br>
+☑ Works with gradient stops and colors in text fields.<br>
+<img src="https://github.com/nimbling/Nimbling_Scripts/raw/master/images/Groups.png" width="400">
+<img src="https://github.com/nimbling/Nimbling_Scripts/raw/master/images/Variables.png" width="400">
 
 ## Run an Illustrator script using Alfred, on a single shortcut, with auto complete
 
-Install "Illustrator Scripts.alfredworkflow" by double clicking it, modify the folder it looks for your scripts for in this window: ![](<images/Modify%20your%20folder.png>). I have assigned **CTRL OPTION CMD SPACE** to it (just mash the bottom row including space) and start typing what your scripts need to do.
+Install "Illustrator Scripts.alfredworkflow" by double clicking it, modify the folder it looks for your scripts for in this window:
+
+<br>
+<img src="https://github.com/nimbling/Nimbling_Scripts/raw/master/images/Modify%20your%20folder.png" width="600">
+<br>
+I have assigned **CTRL OPTION CMD SPACE** to it (just mash the bottom row including space) and start typing what your scripts need to do.
