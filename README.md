@@ -258,6 +258,7 @@ Combines all same name keys and groups their values.
 Show the combined keys in a list, and when clicking on these: show the values in a plain text list for copy-pasting into other design tools like figma or a google sheet.
 
 <img src="https://github.com/nimbling/Nimbling_Scripts/raw/master/images/JsonExtractor.png" width="600">
+
 ## Replacer for figma
 A simple figma panel that replaces colors based on their "group" or per link to a specific color variable.
 
