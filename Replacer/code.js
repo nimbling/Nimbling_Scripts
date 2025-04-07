@@ -148,6 +148,7 @@ async function variables_scanSelection() {
   let hexColorsFound = new Map();
   let variablesCount = 0;
   let hexCount = 0;
+
   const visitNodeForVariableScan = async (node) => {
     if (!node) return;
     const processFoundVariable = (variable) => {
@@ -165,6 +166,8 @@ async function variables_scanSelection() {
         hexCount++;
       }
     };
+
+    // Check Paints (Fills/Strokes) - Unchanged
     const checkPaints = (paintType) => {
       if (node[paintType] && Array.isArray(node[paintType])) {
         node[paintType].forEach((paint, index) => {
@@ -195,6 +198,8 @@ async function variables_scanSelection() {
     };
     checkPaints("fills");
     checkPaints("strokes");
+
+    // Check Text Segments - Unchanged
     if (node.type === "TEXT") {
       try {
         const segments = node.getStyledTextSegments(["fills", "boundVariables"]);
@@ -215,8 +220,34 @@ async function variables_scanSelection() {
         }
       } catch (e) {}
     }
-  };
+
+    // *** NEW: Check Effects ***
+    if (node.effects && Array.isArray(node.effects)) {
+      node.effects.forEach((effect) => {
+        if (!effect.visible) return; // Skip invisible effects
+        // Check effects with a color property (Shadows)
+        if ((effect.type === "DROP_SHADOW" || effect.type === "INNER_SHADOW") && effect.color) {
+          const effectVarId = effect.boundVariables && effect.boundVariables.color && effect.boundVariables.color.id;
+          if (effectVarId) {
+            try {
+              const variable = figma.variables.getVariableById(effectVarId);
+              if (variable && variable.resolvedType === "COLOR") {
+                processFoundVariable(variable);
+              }
+            } catch (e) {} // Ignore errors resolving variable
+          } else {
+            // If not bound, treat as a hex color
+            processFoundHex(utils_rgbToHex(effect.color.r, effect.color.g, effect.color.b));
+          }
+        }
+        // Add checks for other effect types with bindable colors if needed in the future
+      });
+    }
+  }; // end visitNodeForVariableScan
+
   await traverseNodeTree(selection, visitNodeForVariableScan);
+
+  // Process and send results (Unchanged)
   const variablesFoundArray = Array.from(colorVariablesFound.values()).sort((a, b) => a.name.localeCompare(b.name));
   const hexColorsFoundArray = Array.from(hexColorsFound.values()).sort((a, b) => a.hex.localeCompare(b.hex));
   const combinedFound = [].concat(variablesFoundArray, hexColorsFoundArray);
@@ -236,6 +267,7 @@ async function variables_scanSelection() {
   }
   figma.ui.postMessage({ type: "scan-results-variables", variablesFound: combinedFound, allColorVariables: allColorVariables, hasVariablesInSelection: variablesCount + hexCount > 0 });
 }
+
 async function variables_applyReplace(sourceValue, targetVariableId) {
   const isSourceHex = typeof sourceValue === "string" && sourceValue.startsWith("#");
   if (!sourceValue || !targetVariableId) return;
@@ -260,8 +292,9 @@ async function variables_applyReplace(sourceValue, targetVariableId) {
     return;
   }
   let totalReplacementCount = 0;
+
   const tryReplacePaintVariable = (paint, paintIndex, nodePaints) => {
-    const paintVarId = paint.boundVariables && paint.boundVariables.color && paint.boundVariables.color.id;
+    /* Unchanged */ const paintVarId = paint.boundVariables && paint.boundVariables.color && paint.boundVariables.color.id;
     if (!isSourceHex && paintVarId === sourceValue) {
       try {
         return figma.variables.setBoundVariableForPaint(nodePaints[paintIndex], "color", targetVariable);
@@ -281,7 +314,7 @@ async function variables_applyReplace(sourceValue, targetVariableId) {
     return null;
   };
   const tryReplaceGradientStopVariable = (stops) => {
-    let changed = false;
+    /* Unchanged */ let changed = false;
     for (let j = 0; j < stops.length; j++) {
       let stop = stops[j];
       const stopVarId = stop.boundVariables && stop.boundVariables.color && stop.boundVariables.color.id;
@@ -302,8 +335,10 @@ async function variables_applyReplace(sourceValue, targetVariableId) {
     }
     return changed;
   };
+
   const visitNodeForVariableReplace = async (node) => {
     if (!node) return;
+    // Process Fills & Strokes (Unchanged)
     const processPaints = (paintType) => {
       if (!node[paintType] || !Array.isArray(node[paintType]) || node[paintType].length === 0) return;
       let paintsCopy = null;
@@ -333,6 +368,8 @@ async function variables_applyReplace(sourceValue, targetVariableId) {
     };
     processPaints("fills");
     processPaints("strokes");
+
+    // Process Text Segments (Unchanged)
     if (node.type === "TEXT") {
       try {
         const segments = node.getStyledTextSegments(["fills", "boundVariables"]);
@@ -357,8 +394,62 @@ async function variables_applyReplace(sourceValue, targetVariableId) {
         }
       } catch (e) {}
     }
-  };
+
+    // *** NEW: Process Effects ***
+    if (node.effects && Array.isArray(node.effects) && node.effects.length > 0) {
+      let effectsModified = false;
+      let newEffects = null; // Lazy deep copy
+
+      for (let i = 0; i < node.effects.length; i++) {
+        const effect = node.effects[i];
+        let needsUpdate = false;
+
+        // Check only shadow effects with color
+        if ((effect.type === "DROP_SHADOW" || effect.type === "INNER_SHADOW") && effect.color) {
+          const effectVarId = effect.boundVariables && effect.boundVariables.color && effect.boundVariables.color.id;
+
+          if (!isSourceHex && effectVarId === sourceValue) {
+            // Source is variable, and it matches effect's bound variable
+            needsUpdate = true;
+          } else if (isSourceHex && !effectVarId) {
+            // Source is hex, effect is NOT bound, check effect's hex color
+            const effectHex = utils_rgbToHex(effect.color.r, effect.color.g, effect.color.b);
+            if (effectHex === sourceValue) {
+              needsUpdate = true;
+            }
+          }
+        }
+
+        if (needsUpdate) {
+          // Ensure we have a copy before modifying
+          if (!newEffects) newEffects = JSON.parse(JSON.stringify(node.effects));
+
+          // Modify the copied effect
+          const copiedEffect = newEffects[i];
+
+          // Ensure boundVariables object exists
+          if (!copiedEffect.boundVariables) copiedEffect.boundVariables = {};
+          // Set the new binding
+          copiedEffect.boundVariables.color = { type: "VARIABLE_ALIAS", id: targetVariableId };
+          // Add placeholder color object (API might require it like setRangeFills)
+          // We use black with full alpha as a safe default - the binding should override display.
+          copiedEffect.color = { r: 0, g: 0, b: 0, a: 1 };
+
+          effectsModified = true;
+          totalReplacementCount++;
+        }
+      } // end for loop
+
+      // If any effect was modified, assign the whole new array back
+      if (effectsModified) {
+        node.effects = newEffects;
+      }
+    } // end effects check
+  }; // end visitNodeForVariableReplace
+
   await traverseNodeTree(selection, visitNodeForVariableReplace);
+
+  // Notify and Rescan (Unchanged)
   if (totalReplacementCount > 0) {
     figma.notify(`✅ Replaced ${totalReplacementCount} instance(s) of "${sourceVariableName}" with ${targetVariable.name}.`);
     figma.ui.postMessage({ type: "replacement-complete-variables", count: totalReplacementCount });
@@ -370,7 +461,9 @@ async function variables_applyReplace(sourceValue, targetVariableId) {
 }
 
 // --- Variable Group Switcher Logic ---
+// (groups_scanSelection and groups_applyVariableSwitch functions remain unchanged from previous version)
 async function groups_scanSelection() {
+  /* ... As before ... */
   const selection = figma.currentPage.selection;
   if (selection.length === 0) {
     figma.ui.postMessage({ type: "scan-results-groups", reset: true });
@@ -407,6 +500,22 @@ async function groups_scanSelection() {
           }
         }
       }
+      // *** ADDED: Scan effects for group scanner too ***
+      if (node.effects && Array.isArray(node.effects)) {
+        node.effects.forEach((effect) => {
+          if (!effect.visible) return;
+          if (effect.type === "DROP_SHADOW" || effect.type === "INNER_SHADOW") {
+            const effectVarId = effect.boundVariables && effect.boundVariables.color && effect.boundVariables.color.id;
+            if (effectVarId) {
+              try {
+                const variable = figma.variables.getVariableById(effectVarId);
+                processFoundGroupVariable(variable);
+              } catch (e) {}
+            }
+          }
+        });
+      }
+      // *** --- ***
       if (node.boundVariables) {
         for (const propKey in node.boundVariables) {
           const bindings = node.boundVariables[propKey];
@@ -605,14 +714,59 @@ async function groups_applyVariableSwitch(targetPathPrefix) {
       }
     } catch (e) {}
   };
+  // *** NEW: Helper to rebind effect colors ***
+  const rebindEffects = (node) => {
+    if (!node.effects || !Array.isArray(node.effects) || node.effects.length === 0) return;
+    let effectsModified = false;
+    let newEffects = null; // Lazy deep copy
+    const originalEffects = node.effects;
+
+    for (let i = 0; i < originalEffects.length; i++) {
+      const effect = originalEffects[i];
+      // Check only shadow effects with color bindings
+      if ((effect.type === "DROP_SHADOW" || effect.type === "INNER_SHADOW") && effect.boundVariables && effect.boundVariables.color && effect.boundVariables.color.id) {
+        const effectVarId = effect.boundVariables.color.id;
+        try {
+          const currentVar = figma.variables.getVariableById(effectVarId);
+          if (currentVar) {
+            const currentGroupPrefix = utils_getGroupPrefix(utils_getPathPrefix(currentVar.name));
+            if (currentGroupPrefix === targetGroupPrefix) {
+              const currentBaseName = utils_getBaseName(currentVar.name);
+              if (targetVariableMap.has(currentBaseName)) {
+                const targetVar = targetVariableMap.get(currentBaseName);
+                // Ensure deep copy before modifying
+                if (!newEffects) newEffects = JSON.parse(JSON.stringify(originalEffects));
+                // Modify the copied effect
+                const copiedEffect = newEffects[i];
+                if (!copiedEffect.boundVariables) copiedEffect.boundVariables = {};
+                copiedEffect.boundVariables.color = { type: "VARIABLE_ALIAS", id: targetVar.id };
+                // Ensure color property exists
+                if (!copiedEffect.color) copiedEffect.color = { r: 0, g: 0, b: 0, a: 1 };
+
+                effectsModified = true;
+                replacementCount++;
+                nodesProcessed.add(node.id);
+              }
+            }
+          }
+        } catch (e) {} // Ignore errors finding/rebinding variable
+      }
+    }
+    if (effectsModified) {
+      node.effects = newEffects;
+    }
+  };
+
   const visitNodeForGroupReplace = async (node) => {
     try {
+      // Order: Text, Effects, Paints, Others
       rebindTextSegments(node);
+      rebindEffects(node); // Call new helper
       rebindPaints(node, "fills");
       rebindPaints(node, "strokes");
       if (node.boundVariables && !nodesProcessed.has(node.id)) {
         for (const propKey in node.boundVariables) {
-          if (propKey === "fills" || propKey === "strokes") continue;
+          if (propKey === "fills" || propKey === "strokes" || propKey === "effects") continue;
           const bindings = node.boundVariables[propKey];
           if (bindings && bindings.type === "VARIABLE_ALIAS" && bindings.id) {
             tryRebindProperty(node, propKey, bindings.id);
@@ -621,7 +775,10 @@ async function groups_applyVariableSwitch(targetPathPrefix) {
       }
     } catch (e) {}
   };
+
   await traverseNodeTree(selection, visitNodeForGroupReplace);
+
+  // Notify and Rescan (Unchanged)
   if (replacementCount > 0) {
     figma.ui.postMessage({ type: "replacement-complete-groups", count: replacementCount, targetGroup: targetPathPrefix });
     figma.notify(`✅ Switched ${replacementCount} variable instances to path prefix "${targetPathPrefix}".`);
